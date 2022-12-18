@@ -30,15 +30,15 @@ cpi_url_last_month = 'https://www.bls.gov/news.release/archives/cpi_' + last_mon
 m_on_m_last_month = get_inflation_data(cpi_url, "cpi_pressa.r.1.3 cpi_pressa.h.1.2 cpi_pressa.h.2.7")
 m_on_m_today = get_inflation_data(cpi_url, "cpi_pressa.r.1.3 cpi_pressa.h.1.2 cpi_pressa.h.2.8")
 
-y_on_y_last_month = get_inflation_data(cpi_url_last_month, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
-y_on_y_today = get_inflation_data(cpi_url, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
-
 m_on_m_last_month_decimal = get_float(m_on_m_last_month)
 m_on_m_today_decimal = get_float(m_on_m_today)
 
 compare_inflation(m_on_m_last_month_decimal, m_on_m_today_decimal)
 print(m_on_m_last_month.text)
 print(m_on_m_today.text)
+
+y_on_y_last_month = get_inflation_data(cpi_url_last_month, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
+y_on_y_today = get_inflation_data(cpi_url, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
 
 y_on_y_last_month_decimal = get_float(y_on_y_last_month)
 y_on_y_today_decimal = get_float(y_on_y_today)
