@@ -11,7 +11,7 @@ import requests
 
 url = "https://test.deribit.com/api/v2/public/get_instrument"
 
-querystring = {"instrument_name":"ETH-31MAR23-2000-C"}
+querystring = {"instrument_name":"ETH-31MAR23-1600-C"}
 
 response = requests.request("GET", url, params=querystring)
 

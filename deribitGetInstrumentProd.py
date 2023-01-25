@@ -7,11 +7,14 @@ config.read('config.ini')
 
 client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']
+import requests
 
-url = "https://test.deribit.com/api/v2/public/get_order_book_by_instrument_id"
+url = "https://www.deribit.com/api/v2/public/get_instrument"
 
-querystring = {"instrument_id":"126265","depth":10}
+querystring = {"instrument_name":"ETH-31MAR23-1600-C"}
 
 response = requests.request("GET", url, params=querystring)
 
-print(response.text)
+instrument_details = response.json()
+
+print(instrument_details)
