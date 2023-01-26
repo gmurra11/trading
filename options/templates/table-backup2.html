@@ -1,0 +1,54 @@
+<div class="table-container">
+  <h2>March Q1 Options</h2>
+  <table border="1" style="border-collapse: collapse;">
+    <tr style="background-color: lightgray;">
+      <th style="padding: 8px;">Instrument Name</th>
+      <th style="padding: 8px;">IV</th>
+      <th style="padding: 8px;">IVR</th>
+      <th style="padding: 8px;">IVP</th>
+    </tr>
+    {% for option in data_march %}
+    <tr style="background-color: lightgreen;">
+      <td style="padding: 8px;">{{ option[0] }}</td>
+      <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>June Q2 Options</h2>
+  <table border="1" style="border-collapse: collapse;">
+    <tr style="background-color: lightgray;">
+      <th style="padding: 8px;">Instrument Name</th>
+      <th style="padding: 8px;">IV</th>
+      <th style="padding: 8px;">IVR</th>
+      <th style="padding: 8px;">IVP</th>
+    </tr>
+    {% for option in data_june %}
+    <tr style="background-color: lightgreen;">
+      <td style="padding: 8px;">{{ option[0] }}</td>
+      <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>September Q3 Options</h2>
+  <table border="1" style="border-collapse: collapse;">
+    <tr style="background-color: lightgray;">
+      <th style="padding: 8px;">Instrument Name</th>
+      <th style="padding: 8px;">IV</th>
+      <th style="padding: 8px;">IVR</th>
+      <th style="padding: 8px;">IVP</th>
+    </tr>
+    {% for option in data_sep %}
+    <tr style="background-color: lightgreen;">
+      <td style="padding: 8px;">{{ option[0] }}</td>
+      <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
+      <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
