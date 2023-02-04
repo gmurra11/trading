@@ -7,6 +7,10 @@
           <th style="padding: 8px;">IV</th>
           <th style="padding: 8px;">IVR</th>
           <th style="padding: 8px;">IVP</th>
+          <th style="padding: 8px;">OI</th>
+          <th style="padding: 8px;">DAILY VOL</th>
+          <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
         </tr>
         {% for option in data_march %}
         <tr style="background-color: lightgreen;">
@@ -14,6 +18,10 @@
           <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+          <td style="padding: 8px;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;">{{ option[7]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -27,6 +35,10 @@
           <th style="padding: 8px;">IV</th>
           <th style="padding: 8px;">IVR</th>
           <th style="padding: 8px;">IVP</th>
+          <th style="padding: 8px;">OI</th>
+          <th style="padding: 8px;">DAILY VOL</th>
+          <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
         </tr>
         {% for option in data_june %}
         <tr style="background-color: lightgreen;">
@@ -34,6 +46,10 @@
           <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+          <td style="padding: 8px;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;">{{ option[7]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -47,6 +63,10 @@
           <th style="padding: 8px;">IV</th>
           <th style="padding: 8px;">IVR</th>
           <th style="padding: 8px;">IVP</th>
+          <th style="padding: 8px;">OI</th>
+          <th style="padding: 8px;">DAILY VOL</th>
+          <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
         </tr>
         {% for option in data_sep %}
         <tr style="background-color: lightgreen;">
@@ -54,6 +74,10 @@
           <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
           <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
+          <td style="padding: 8px;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;">{{ option[7]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -67,5 +91,7 @@
 
 .table-wrapper {
   margin-right: 10px;
+  font-size: 6px;
 }
+
 </style>

@@ -9,7 +9,7 @@ client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']
 import requests
 
-url = "https://test.deribit.com/api/v2/public/get_instrument"
+url = "https://www.deribit.com/api/v2/public/get_instrument"
 
 querystring = {"instrument_name":"ETH-31MAR23-1600-C"}
 

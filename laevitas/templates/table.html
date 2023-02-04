@@ -1,0 +1,173 @@
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>March Q1 Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+        </tr>
+        {% for option in data_call_march %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>March Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: lightblue;">
+            <td style="padding: 8px;">{{ data_march_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>March Q1 Put Options</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Instrument Name</th>
+            <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+            <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          </tr>
+          {% for option in data_put_march %}
+          <tr style="background-color: lightpink;">
+            <td style="padding: 8px;">{{ option[0] }}</td>
+            <td style="padding: 8px;">{{ option[1]|int }}</td>
+            <td style="padding: 8px;">{{ option[2]|int }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+</div>
+
+<div class="table-container">
+    <div class="table-wrapper">
+      <h2>June Q2 Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+        </tr>
+        {% for option in data_call_june %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>June Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: lightblue;">
+            <td style="padding: 8px;">{{ data_june_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+      <h2>June Q2 Put Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+        </tr>
+        {% for option in data_put_june %}
+        <tr style="background-color: lightpink;">
+          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+<div class="table-container">
+    <div class="table-wrapper">
+      <h2>September Q3 Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+        </tr>
+        {% for option in data_call_sep %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>September Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: lightblue;">
+            <td style="padding: 8px;">{{ data_sep_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+      <h2>September Q3 Put Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+        </tr>
+        {% for option in data_put_sep %}
+        <tr style="background-color: lightpink;">
+          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+</div>
+
+<style>
+.table-container {
+  display: flex;
+}
+
+.table-wrapper {
+  margin-right: 10px;
+}
+
+th {
+  font-size: 18px; /* or any other size you want */
+}
+
+td {
+  font-size: 14px; /* or any other size you want */
+}
+
+h {
+  padding: 16px;
+  text-align: center;
+}
+
+</style>
