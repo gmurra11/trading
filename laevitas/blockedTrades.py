@@ -9,7 +9,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Data Directory
-DIR = "../data"
+DIR = "/home/gmurray/REPO/trading/data"
 
 # Files
 MARCH_STRIKES_FILE = f"{DIR}/March-Q1-Options.txt"
@@ -24,7 +24,7 @@ SEPTEMBER_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-29SEP23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
-config.read('../config.ini')
+config.read('/home/gmurray/REPO/trading/config.ini')
 
 client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']

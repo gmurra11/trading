@@ -7,7 +7,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Data Directory
-DIR = "../data"
+DIR = "/home/gmurray/REPO/trading/data"
 
 # Constants
 HISTORICAL_LOW_IV = 15.55
@@ -26,7 +26,7 @@ SEPTEMBER_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-29SEP23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
-config.read('../config.ini')
+config.read('/home/gmurray/REPO/trading/config.ini')
 
 client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']
@@ -38,7 +38,7 @@ def calculate_ivr(mark_iv):
     return (mark_iv - HISTORICAL_LOW_IV) / (HISTORICAL_HIGH_IV - HISTORICAL_LOW_IV) * 100
 
 def calculate_ivp(mark_iv):
-    df = pd.read_csv("historical_eth_iv.csv", encoding="utf-8", sep=',')
+    df = pd.read_csv(f"{DIR}/historical_eth_iv.csv", encoding="utf-8", sep=',')
     ivp = df.query("HV < @mark_iv").count()[0]/365*100
     return ivp
 
