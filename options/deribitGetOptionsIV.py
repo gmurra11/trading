@@ -6,20 +6,23 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# Data Directory
+DIR = "../data"
+
 # Constants
 HISTORICAL_LOW_IV = 15.55
 HISTORICAL_HIGH_IV = 185.90
 
 # Files
-MARCH_STRIKES_FILE = "March-Q1-Options.txt"
-MARCH_LVT_WEEKLY_CSV_FILE = "LVT-WEEKLY-31MAR23.csv"
-MARCH_LVT_MONTHLY_CSV_FILE = "LVT-MONTHLY-31MAR23.csv"
-JUNE_STRIKES_FILE = "June-Q2-Options.txt"
-JUNE_LVT_WEEKLY_CSV_FILE = "LVT-WEEKLY-30JUN23.csv"
-JUNE_LVT_MONTHLY_CSV_FILE = "LVT-MONTHLY-30JUN23.csv"
-SEPTEMBER_STRIKES_FILE = "September-Q3-Options.txt"
-SEPTEMBER_LVT_WEEKLY_CSV_FILE = "LVT-WEEKLY-29SEP23.csv"
-SEPTEMBER_LVT_MONTHLY_CSV_FILE = "LVT-MONTHLY-29SEP23.csv"
+MARCH_STRIKES_FILE = f"{DIR}/March-Q1-Options.txt"
+MARCH_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-31MAR23.csv"
+MARCH_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-31MAR23.csv"
+JUNE_STRIKES_FILE = f"{DIR}/June-Q2-Options.txt"
+JUNE_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-30JUN23.csv"
+JUNE_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-30JUN23.csv"
+SEPTEMBER_STRIKES_FILE = f"{DIR}/September-Q3-Options.txt"
+SEPTEMBER_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-29SEP23.csv"
+SEPTEMBER_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-29SEP23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
@@ -57,7 +60,7 @@ def table1():
     options = []
     with open(MARCH_STRIKES_FILE, "r") as file:
         for line in file:
-            instrument_name = line.strip()
+            instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
 
             response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
@@ -105,7 +108,7 @@ def table2():
     options = []
     with open(JUNE_STRIKES_FILE, "r") as file:
         for line in file:
-            instrument_name = line.strip()
+            instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
 
             response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
@@ -153,7 +156,7 @@ def table3():
     options = []
     with open(SEPTEMBER_STRIKES_FILE, "r") as file:
         for line in file:
-            instrument_name = line.strip()
+            instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
 
             response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
