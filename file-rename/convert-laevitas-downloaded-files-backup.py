@@ -16,11 +16,6 @@ filename_map = {
     "lvt_chart ETH Buy_Sell Volume Last  COMMON.Week 31MAR23 .csv": "LVT-WEEKLY-31MAR23.csv"
 }
 
-# Clean up old files with names starting with "LVT-"
-for filename in os.listdir(dst_dir):
-    if filename.startswith("LVT-"):
-        os.remove(os.path.join(dst_dir, filename))
-
 # Loop through the files in the source directory
 for filename in os.listdir(src_dir):
     # Check if the file is in the mapping
@@ -31,3 +26,5 @@ for filename in os.listdir(src_dir):
 
         # Rename the file
         os.rename(src_path, dst_path)
+        # Clean up old files
+        #os.remove(os.path.join(src_dir, filename))
