@@ -39,13 +39,17 @@
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">Instrument Name</th>
             <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+            <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
             <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+            <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
           </tr>
           {% for option in data_put_march %}
           <tr style="background-color: lightpink;">
             <td style="padding: 8px;">{{ option[0] }}</td>
             <td style="padding: 8px;">{{ option[1]|int }}</td>
+            <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
             <td style="padding: 8px;">{{ option[2]|int }}</td>
+            <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -59,13 +63,17 @@
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_call_june %}
         <tr style="background-color: lightgreen;">
           <td style="padding: 8px;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -89,13 +97,17 @@
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_put_june %}
         <tr style="background-color: lightpink;">
           <td style="padding: 8px;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -109,13 +121,17 @@
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_call_sep %}
         <tr style="background-color: lightgreen;">
           <td style="padding: 8px;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -139,13 +155,17 @@
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_put_sep %}
         <tr style="background-color: lightpink;">
           <td style="padding: 8px;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
         </tr>
         {% endfor %}
       </table>
