@@ -104,26 +104,25 @@ def march_call_table():
 
             weekly_call_totals = extract_call_totals(instrument_name, MARCH_LVT_WEEKLY_CSV_FILE)
             monthly_call_totals = extract_call_totals(instrument_name, MARCH_LVT_MONTHLY_CSV_FILE)
+
+            call_options.append((instrument_name, weekly_call_totals, monthly_call_totals))
+
+    with open(MARCH_STRIKES_FILE_T1, "r") as file:
+        for line in file:
+            instrument_name = line.strip() + "C"  #appending C for Call to the name
+            query_instrument_name = {"instrument_name": instrument_name}
+
             weekly_call_totals_t1 = extract_call_totals(instrument_name, MARCH_LVT_WEEKLY_CSV_FILE_T1)
             monthly_call_totals_t1 = extract_call_totals(instrument_name, MARCH_LVT_MONTHLY_CSV_FILE_T1)
 
-            call_options.append((instrument_name, weekly_call_totals, monthly_call_totals))
-            call_options_t1.append((instrument_name, weekly_call_totals_t1, monthly_call_totals_t1))
+            call_options_t1.append((instrument_name, weekly_call_totals, monthly_call_totals))
 
-    call_options_diff = []
-    for option, option_t1 in zip(call_options, call_options_t1):
-        weekly_diff = 0 if option_t1[1] == 0 else  round((abs(option[1] - option_t1[1]) / option_t1[1]) * 100, 2)
-        monthly_diff = 0 if option_t1[2] == 0 else round((abs(option[2] - option_t1[2]) / option_t1[2]) * 100, 2)
-        call_options_diff.append((option[0], option[1], option[2], weekly_diff, monthly_diff))
-
-    march_sorted_call_options = sorted(call_options_diff, key=lambda x: (x[2], x[1]), reverse=True)
+    march_sorted_call_options = sorted(call_options, key=lambda x: (x[2], x[1]), reverse=True)
 
     for option in march_sorted_call_options:
         print(f"Instrument Name: {option[0]}")
         print(f"WEEKLY CALL TOTALS: {int(option[1])}")
-        print(f"WEEKLY % DIFFERENCE: {round(float(option[3]), 2)}")
         print(f"MONTHLY CALL TOTALS: {int(option[2])}")
-        print(f"MONTHLY % DIFFERENCE: {round(float(option[4]), 2)}")
     return march_sorted_call_options
 
 def march_put_table():

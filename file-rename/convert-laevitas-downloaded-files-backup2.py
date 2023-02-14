@@ -1,5 +1,4 @@
 import os
-import datetime
 
 # Original files directory
 src_dir = "/home/gmurray/Downloads"
@@ -20,31 +19,17 @@ filename_map = {
     "lvt_chart ETH Buy_Sell Volume Last  COMMON.Week 31MAR23 .csv": "LVT-WEEKLY-31MAR23.csv"
 }
 
-# Get the modification time of the destination directory
-dst_dir_stat = os.stat(dst_dir)
-dst_dir_mod_time = dst_dir_stat.st_mtime
-
-# Get the current date and time
-current_date = datetime.datetime.now().date()
-
 # Clean up old daily files with names starting with "LVT-"
-# and move the old files with names starting with "LVT-" to the daily directory
-# if the modification time of the destination directory is not today
-if datetime.datetime.fromtimestamp(dst_dir_mod_time).date() != current_date:
-    for filename in os.listdir(daily_dir):
-        if filename.startswith("LVT-"):
-            os.remove(os.path.join(daily_dir, filename))
+for filename in os.listdir(daily_dir):
+    if filename.startswith("LVT-"):
+        os.remove(os.path.join(daily_dir, filename))
 
-    for filename in os.listdir(dst_dir):
-        if filename.startswith("LVT-"):
-            src_path = os.path.join(dst_dir, filename)
-            dst_path = os.path.join(daily_dir, filename)
-            os.rename(src_path, dst_path)
-
-# Delete existing files in the destination directory
+# Move the old files with names starting with "LVT-" to the daily directory
 for filename in os.listdir(dst_dir):
-    if filename in filename_map.values():
-        os.remove(os.path.join(dst_dir, filename))
+    if filename.startswith("LVT-"):
+        src_path = os.path.join(dst_dir, filename)
+        dst_path = os.path.join(daily_dir, filename)
+        os.rename(src_path, dst_path)
 
 # Loop through the files in the source directory
 for filename in os.listdir(src_dir):
