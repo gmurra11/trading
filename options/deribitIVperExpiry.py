@@ -56,7 +56,21 @@ def extract_call_totals(instrument_name, csv_file):
                 calls_total = calls_buy + calls_sell
                 return calls_total
 
-def table1():
+def extract_put_totals(instrument_name, csv_file):
+
+    strike = instrument_name.split('-')[2]
+
+    # Read the csv file and find the corresponding strike
+    with open(csv_file, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["Strike"] == strike:
+                puts_buy = abs(int(row["Puts Buy"]))
+                puts_sell = abs(int(row["Puts Sell"]))
+                puts_total = puts_buy + puts_sell
+                return puts_total
+
+def march_call_table():
     options = []
     with open(MARCH_STRIKES_FILE, "r") as file:
         for line in file:
@@ -101,10 +115,52 @@ def table1():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return march_sorted_options
 
-    #return render_template('table.html', data_march=march_sorted_options, title='March Q1 Options')
+def march_put_table():
+    options = []
+    with open(MARCH_STRIKES_FILE, "r") as file:
+        for line in file:
+            instrument_name = line.strip() + "P"  #appending C for Call to the name
+            query_instrument_name = {"instrument_name": instrument_name}
 
-#@app.route('/table2')
-def table2():
+            response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
+
+            #I need the instrument ID from get_instrument api call
+            instrument_details = response_instrument_name.json()
+
+            #I pass this to get_order_book_by_instrument_id to get the mark_iv
+            query_for_mark_iv = {"instrument_id": instrument_details['result']['instrument_id']}
+
+            response_mark_iv = requests.request("GET", url_order_book, params=query_for_mark_iv)
+
+            iv_details = response_mark_iv.json()
+
+            if 'result' in iv_details and 'mark_iv' in iv_details['result'] and iv_details['result']['mark_iv'] is not None:
+                mark_iv = iv_details['result']['mark_iv']
+                ivr = calculate_ivr(mark_iv)
+                ivp = calculate_ivp(mark_iv)
+                oi = iv_details['result']['open_interest']
+                vol = iv_details['result']['stats']['volume']
+                weekly_put_totals = extract_put_totals(instrument_name, MARCH_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, MARCH_LVT_MONTHLY_CSV_FILE)
+                options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
+
+    march_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+
+    for option in march_sorted_options:
+        print(f"Instrument Name: {option[0]}")
+        print(f"IV: {option[1]:.2f}%")
+        print(f"IVR: {option[2]:.2f}%")
+        print(f"IVP: {option[3]:.2f}%")
+        print(f"OI: {int(option[4])}")
+        if option[5] is None or option[5] == "":
+            print(f"VOL: None")
+        else:
+            print(f"VOL: {int(option[5])}")
+        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return march_sorted_options
+
+def june_call_table():
     options = []
     with open(JUNE_STRIKES_FILE, "r") as file:
         for line in file:
@@ -149,10 +205,52 @@ def table2():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return june_sorted_options
 
-    #return render_template('table.html', data_june=june_sorted_options, title='June Q2 Options')
+def june_put_table():
+    options = []
+    with open(JUNE_STRIKES_FILE, "r") as file:
+        for line in file:
+            instrument_name = line.strip() + "P"  #appending C for Call to the name
+            query_instrument_name = {"instrument_name": instrument_name}
 
-#@app.route('/table3')
-def table3():
+            response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
+
+            #I need the instrument ID from get_instrument api call
+            instrument_details = response_instrument_name.json()
+
+            #I pass this to get_order_book_by_instrument_id to get the mark_iv
+            query_for_mark_iv = {"instrument_id": instrument_details['result']['instrument_id']}
+
+            response_mark_iv = requests.request("GET", url_order_book, params=query_for_mark_iv)
+
+            iv_details = response_mark_iv.json()
+
+            if 'result' in iv_details and 'mark_iv' in iv_details['result'] and iv_details['result']['mark_iv'] is not None:
+                mark_iv = iv_details['result']['mark_iv']
+                ivr = calculate_ivr(mark_iv)
+                ivp = calculate_ivp(mark_iv)
+                oi = iv_details['result']['open_interest']
+                vol = iv_details['result']['stats']['volume']
+                weekly_put_totals = extract_put_totals(instrument_name, JUNE_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, JUNE_LVT_MONTHLY_CSV_FILE)
+                options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
+
+    june_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+
+    for option in june_sorted_options:
+        print(f"Instrument Name: {option[0]}")
+        print(f"IV: {option[1]:.2f}%")
+        print(f"IVR: {option[2]:.2f}%")
+        print(f"IVP: {option[3]:.2f}%")
+        print(f"OI: {int(option[4])}")
+        if option[5] is None or option[5] == "":
+            print(f"VOL: None")
+        else:
+            print(f"VOL: {int(option[5])}")
+        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return june_sorted_options
+
+def september_call_table():
     options = []
     with open(SEPTEMBER_STRIKES_FILE, "r") as file:
         for line in file:
@@ -196,12 +294,59 @@ def table3():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return september_sorted_options
 
+def september_put_table():
+    options = []
+    with open(SEPTEMBER_STRIKES_FILE, "r") as file:
+        for line in file:
+            instrument_name = line.strip() + "P"  #appending C for Call to the name
+            query_instrument_name = {"instrument_name": instrument_name}
+
+            response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
+
+            #I need the instrument ID from get_instrument api call
+            instrument_details = response_instrument_name.json()
+
+            #I pass this to get_order_book_by_instrument_id to get the mark_iv
+            query_for_mark_iv = {"instrument_id": instrument_details['result']['instrument_id']}
+
+            response_mark_iv = requests.request("GET", url_order_book, params=query_for_mark_iv)
+
+            iv_details = response_mark_iv.json()
+
+            if 'result' in iv_details and 'mark_iv' in iv_details['result'] and iv_details['result']['mark_iv'] is not None:
+                mark_iv = iv_details['result']['mark_iv']
+                ivr = calculate_ivr(mark_iv)
+                ivp = calculate_ivp(mark_iv)
+                oi = iv_details['result']['open_interest']
+                vol = iv_details['result']['stats']['volume']
+                weekly_put_totals = extract_put_totals(instrument_name, SEPTEMBER_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, SEPTEMBER_LVT_MONTHLY_CSV_FILE)
+                options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
+
+    september_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+
+    for option in september_sorted_options:
+        print(f"Instrument Name: {option[0]}")
+        print(f"IV: {option[1]:.2f}%")
+        print(f"IVR: {option[2]:.2f}%")
+        print(f"IVP: {option[3]:.2f}%")
+        if option[5] is None or option[5] == "":
+            print(f"VOL: None")
+        else:
+            print(f"VOL: {int(option[5])}")
+        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return september_sorted_options
+
 @app.route('/iv-per-expiry')
 def push_web():
-    march = table1()
-    june = table2()
-    sep = table3()
-    return render_template('table.html', data_march=march, data_june=june, data_sep=sep)
+    march_call = march_call_table()
+    march_put = march_put_table()
+    june_call = june_call_table()
+    june_put = june_put_table()
+    sep_call = september_call_table()
+    sep_put = september_put_table()
+    return render_template('table.html', data_march_call=march_call, data_march_put=march_put, data_june_call=june_call, data_june_put=june_put, data_sep_call=sep_call, data_sep_put=sep_put)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
