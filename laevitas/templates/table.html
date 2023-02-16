@@ -6,16 +6,20 @@
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_call_march %}
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -27,8 +31,8 @@
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">Put / Call Ratio</th>
           </tr>
-          <tr style="background-color: lightblue;">
-            <td style="padding: 8px;">{{ data_march_pc_ratio|round(2) }}</td>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_march_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
@@ -40,16 +44,20 @@
             <th style="padding: 8px;">Instrument Name</th>
             <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
             <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+            <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
             <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
             <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+            <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
           </tr>
           {% for option in data_put_march %}
           <tr style="background-color: lightpink;">
-            <td style="padding: 8px;">{{ option[0] }}</td>
+            <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
             <td style="padding: 8px;">{{ option[1]|int }}</td>
-            <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+            <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+            <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
             <td style="padding: 8px;">{{ option[2]|int }}</td>
-            <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+            <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+            <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -64,16 +72,20 @@
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_call_june %}
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -85,8 +97,8 @@
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">Put / Call Ratio</th>
           </tr>
-          <tr style="background-color: lightblue;">
-            <td style="padding: 8px;">{{ data_june_pc_ratio|round(2) }}</td>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_june_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
@@ -98,16 +110,20 @@
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_put_june %}
         <tr style="background-color: lightpink;">
-          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -122,16 +138,20 @@
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_call_sep %}
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -143,8 +163,8 @@
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">Put / Call Ratio</th>
           </tr>
-          <tr style="background-color: lightblue;">
-            <td style="padding: 8px;">{{ data_sep_pc_ratio|round(2) }}</td>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_sep_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
@@ -156,16 +176,20 @@
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
         </tr>
         {% for option in data_put_sep %}
         <tr style="background-color: lightpink;">
-          <td style="padding: 8px;">{{ option[0] }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: orange;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -182,7 +206,7 @@
 }
 
 th {
-  font-size: 18px; /* or any other size you want */
+  font-size: 15px; /* or any other size you want */
 }
 
 td {
@@ -190,7 +214,7 @@ td {
 }
 
 h {
-  padding: 16px;
+  padding: 14px;
   text-align: center;
 }
 

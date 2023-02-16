@@ -12,6 +12,8 @@ app = Flask(__name__)
 DIR = "/home/gmurray/REPO/trading/data"
 # T-1
 T1 = "/home/gmurray/REPO/trading/data/daily"
+# T-7
+T7 = "/home/gmurray/REPO/trading/data/weekly"
 
 # Files
 MARCH_STRIKES_FILE = f"{DIR}/March-Q1-Options.txt"
@@ -34,6 +36,17 @@ JUNE_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-30JUN23.csv"
 SEPTEMBER_STRIKES_FILE_T1 = f"{T1}/September-Q3-Options.txt"
 SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-29SEP23.csv"
 SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-29SEP23.csv"
+
+# T-7 Files (From Weekly)
+MARCH_STRIKES_FILE_T7 = f"{T7}/March-Q1-Options.txt"
+MARCH_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-31MAR23.csv"
+MARCH_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-31MAR23.csv"
+JUNE_STRIKES_FILE_T7 = f"{T7}/June-Q2-Options.txt"
+JUNE_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-30JUN23.csv"
+JUNE_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-30JUN23.csv"
+SEPTEMBER_STRIKES_FILE_T7 = f"{T7}/September-Q3-Options.txt"
+SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-29SEP23.csv"
+SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-29SEP23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
@@ -94,9 +107,10 @@ def extract_put_totals(instrument_name, csv_file):
 
                 return blocked_puts_total
 
-def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthly_csv_file, weekly_csv_file_t1, monthly_csv_file_t1):
+def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthly_csv_file, weekly_csv_file_t1, monthly_csv_file_t1, weekly_csv_file_t7, monthly_csv_file_t7):
     options = []
     options_t1 = []
+    options_t7 = []
     with open(strikes_file, "r") as file:
         for line in file:
             instrument_name = line.strip() + option_type  #appending option type to the name
@@ -106,32 +120,42 @@ def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthl
             monthly_totals = extract_call_totals(instrument_name, monthly_csv_file) if option_type == "C" else extract_put_totals(instrument_name, monthly_csv_file)
             weekly_totals_t1 = extract_call_totals(instrument_name, weekly_csv_file_t1) if option_type == "C" else extract_put_totals(instrument_name, weekly_csv_file_t1)
             monthly_totals_t1 = extract_call_totals(instrument_name, monthly_csv_file_t1) if option_type == "C" else extract_put_totals(instrument_name, monthly_csv_file_t1)
+            weekly_totals_t7 = extract_call_totals(instrument_name, weekly_csv_file_t7) if option_type == "C" else extract_put_totals(instrument_name, weekly_csv_file_t7)
+            monthly_totals_t7 = extract_call_totals(instrument_name, monthly_csv_file_t7) if option_type == "C" else extract_put_totals(instrument_name, monthly_csv_file_t7)
 
             options.append((instrument_name, weekly_totals, monthly_totals))
             options_t1.append((instrument_name, weekly_totals_t1, monthly_totals_t1))
+            options_t7.append((instrument_name, weekly_totals_t7, monthly_totals_t7))
 
     options_diff = []
-    for opt, opt_t1 in zip(options, options_t1):
-        weekly_diff = 0 if opt_t1[1] == 0 else  round((abs(opt[1] - opt_t1[1]) / opt_t1[1]) * 100, 2)
-        monthly_diff = 0 if opt_t1[2] == 0 else round((abs(opt[2] - opt_t1[2]) / opt_t1[2]) * 100, 2)
-        options_diff.append((opt[0], opt[1], opt[2], weekly_diff, monthly_diff))
+    for opt, opt_t1, opt_t7 in zip(options, options_t1, options_t7):
+        #setting the current or live directory ./ files to 0 if a None value is found, otherwise it breaks the caulcation
+        opt_1 = opt[1] if opt[1] else 0
+        opt_2 = opt[2] if opt[2] else 0
+        weekly_diff_t1 = 0 if opt_t1[1] is None or opt_t1[1] == 0 else round((abs(opt_1 - opt_t1[1]) / opt_t1[1]) * 100, 2)
+        monthly_diff_t1 = 0 if opt_t1[2] is None or opt_t1[2] == 0 else round((abs(opt_2 - opt_t1[2]) / opt_t1[2]) * 100, 2)
+        weekly_diff_t7 = 0 if opt_t7[1] is None or opt_t7[1] == 0 else round((abs(opt_1 - opt_t7[1]) / opt_t7[1]) * 100, 2)
+        monthly_diff_t7 = 0 if opt_t7[2] is None or opt_t7[2] == 0 else round((abs(opt_2 - opt_t7[2]) / opt_t7[2]) * 100, 2)
+        options_diff.append((opt[0], opt_1, opt_2, weekly_diff_t1, monthly_diff_t1, weekly_diff_t7, monthly_diff_t7))
 
     sorted_options = sorted(options_diff, key=lambda x: (x[2], x[1]), reverse=True)
 
     for option in sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"WEEKLY CALL TOTALS: {int(option[1])}")
-        print(f"WEEKLY % DIFFERENCE: {round(float(option[3]), 2)}")
+        print(f"T1 WEEKLY % DIFFERENCE: {round(float(option[3]), 2)}")
+        print(f"T7 WEEKLY % DIFFERENCE: {round(float(option[5]), 2)}")
         print(f"MONTHLY CALL TOTALS: {int(option[2])}")
-        print(f"MONTHLY % DIFFERENCE: {round(float(option[4]), 2)}")
+        print(f"T1 MONTHLY % DIFFERENCE: {round(float(option[4]), 2)}")
+        print(f"T7 MONTHLY % DIFFERENCE: {round(float(option[6]), 2)}")
     return sorted_options
 
-march_call_table = get_options_table("MARCH", "C", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1)
-march_put_table = get_options_table("MARCH", "P", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1)
-june_call_table = get_options_table("JUNE", "C", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1)
-june_put_table = get_options_table("JUNE", "P", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1)
-september_call_table = get_options_table("SEPTEMBER", "C", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1)
-september_put_table = get_options_table("SEPTEMBER", "P", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1)
+march_call_table = get_options_table("MARCH", "C", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)
+march_put_table = get_options_table("MARCH", "P", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)
+june_call_table = get_options_table("JUNE", "C", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1, JUNE_LVT_WEEKLY_CSV_FILE_T7, JUNE_LVT_MONTHLY_CSV_FILE_T7)
+june_put_table = get_options_table("JUNE", "P", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1, JUNE_LVT_WEEKLY_CSV_FILE_T7, JUNE_LVT_MONTHLY_CSV_FILE_T7)
+september_call_table = get_options_table("SEPTEMBER", "C", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7)
+september_put_table = get_options_table("SEPTEMBER", "P", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7)
 
 @app.route('/blocked-bets')
 def push_web():

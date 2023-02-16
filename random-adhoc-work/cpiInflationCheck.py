@@ -59,7 +59,7 @@ m_on_m_today_decimal = get_float(m_on_m_today)
 
 y_on_y_last_month = get_inflation_data(cpi_url_last_month, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
 y_on_y_today = get_inflation_data(cpi_url, "cpi_pressa.r.1.3 cpi_pressa.h.1.9")
-y_on_y_market_expectation = 5.7
+y_on_y_market_expectation = 5.5
 
 y_on_y_last_month_decimal = get_float(y_on_y_last_month)
 y_on_y_today_decimal = get_float(y_on_y_today)

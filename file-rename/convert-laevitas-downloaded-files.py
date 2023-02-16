@@ -10,6 +10,9 @@ dst_dir = "/home/gmurray/REPO/trading/data"
 # Daily output directory
 daily_dir = "/home/gmurray/REPO/trading/data/daily"
 
+# Weekly output directory
+weekly_dir = "/home/gmurray/REPO/trading/data/weekly"
+
 # Mapping of old filenames to new filenames
 filename_map = {
     "lvt_chart ETH Buy_Sell Volume Last  Month 31MAR23 .csv": "LVT-MONTHLY-31MAR23.csv",
@@ -40,6 +43,14 @@ if datetime.datetime.fromtimestamp(dst_dir_mod_time).date() != current_date:
             src_path = os.path.join(dst_dir, filename)
             dst_path = os.path.join(daily_dir, filename)
             os.rename(src_path, dst_path)
+
+    # Copy daily files to weekly directory if it's Sunday
+    if current_date.weekday() == 6:
+        for filename in os.listdir(daily_dir):
+            if filename.startswith("LVT-"):
+                src_path = os.path.join(daily_dir, filename)
+                dst_path = os.path.join(weekly_dir, filename)
+                shutil.copy(src_path, dst_path)
 
 # Delete existing files in the destination directory
 for filename in os.listdir(dst_dir):
