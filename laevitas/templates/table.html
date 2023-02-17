@@ -3,6 +3,7 @@
       <h2>March Q1 Call Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -13,6 +14,7 @@
         </tr>
         {% for option in data_call_march %}
         <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
           <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
@@ -41,6 +43,7 @@
         <h2>March Q1 Put Options</h2>
         <table border="1" style="border-collapse: collapse;">
           <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">#</th>
             <th style="padding: 8px;">Instrument Name</th>
             <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
             <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -51,6 +54,7 @@
           </tr>
           {% for option in data_put_march %}
           <tr style="background-color: lightpink;">
+            <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
             <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
             <td style="padding: 8px;">{{ option[1]|int }}</td>
             <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
@@ -69,6 +73,7 @@
       <h2>June Q2 Call Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -79,6 +84,7 @@
         </tr>
         {% for option in data_call_june %}
         <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
           <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
@@ -107,6 +113,7 @@
       <h2>June Q2 Put Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -117,6 +124,7 @@
         </tr>
         {% for option in data_put_june %}
         <tr style="background-color: lightpink;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
           <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
@@ -135,6 +143,7 @@
       <h2>September Q3 Call Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -145,6 +154,7 @@
         </tr>
         {% for option in data_call_sep %}
         <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
           <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
@@ -173,6 +183,7 @@
       <h2>September Q3 Put Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
@@ -183,6 +194,7 @@
         </tr>
         {% for option in data_put_sep %}
         <tr style="background-color: lightpink;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
           <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
