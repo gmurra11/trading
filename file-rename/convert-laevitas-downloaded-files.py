@@ -1,5 +1,6 @@
 import os
 import datetime
+import shutil
 
 # Original files directory
 src_dir = "/home/gmurray/Downloads"
@@ -50,7 +51,7 @@ if datetime.datetime.fromtimestamp(dst_dir_mod_time).date() != current_date:
             if filename.startswith("LVT-"):
                 src_path = os.path.join(daily_dir, filename)
                 dst_path = os.path.join(weekly_dir, filename)
-                shutil.copy(src_path, dst_path)
+                shutil.copy2(src_path, dst_path)
 
 # Delete existing files in the destination directory
 for filename in os.listdir(dst_dir):
