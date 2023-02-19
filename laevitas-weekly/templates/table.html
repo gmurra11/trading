@@ -1,0 +1,233 @@
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>Next Friday Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+        </tr>
+        {% for option in data_call_next_friday %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>Next Friday Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_next_friday_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>Next Friday Q1 Put Options</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">#</th>
+            <th style="padding: 8px;">Instrument Name</th>
+            <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+            <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+            <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+            <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+            <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+            <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+          </tr>
+          {% for option in data_put_next_friday %}
+          <tr style="background-color: lightpink;">
+            <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+            <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+            <td style="padding: 8px;">{{ option[1]|int }}</td>
+            <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+            <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+            <td style="padding: 8px;">{{ option[2]|int }}</td>
+            <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+            <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+</div>
+
+<div class="table-container">
+    <div class="table-wrapper">
+      <h2>Following Friday Q2 Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+        </tr>
+        {% for option in data_call_following_friday %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>Following Friday Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_following_friday_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+      <h2>Following Friday Q2 Put Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+        </tr>
+        {% for option in data_put_following_friday %}
+        <tr style="background-color: lightpink;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+<div class="table-container">
+    <div class="table-wrapper">
+      <h2>Third Friday Q3 Call Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+        </tr>
+        {% for option in data_call_third_friday %}
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+        <h2>Third Friday Ratio</h2>
+        <table border="1" style="border-collapse: collapse;">
+          <tr style="background-color: lightgray;">
+            <th style="padding: 8px;">Put / Call Ratio</th>
+          </tr>
+          <tr style="background-color: whitesmoke;">
+            <td style="padding: 8px;font-weight: bold;">{{ data_third_friday_pc_ratio|round(2) }}</td>
+          </tr>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+      <h2>Third Friday Q3 Put Options</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">#</th>
+          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> WEEKLY % DIFFERENCE</th>
+          <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
+          <th style="padding: 8px;">T1 --> MONTHLY % DIFFERENCE</th>
+          <th style="padding: 8px;">T7 --> MONTHLY % DIFFERENCE</th>
+        </tr>
+        {% for option in data_put_third_friday %}
+        <tr style="background-color: lightpink;">
+          <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
+          <td style="padding: 8px;">{{ option[1]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;">{{ option[2]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+</div>
+
+<style>
+.table-container {
+  display: flex;
+}
+
+.table-wrapper {
+  margin-right: 10px;
+}
+
+th {
+  font-size: 15px; /* or any other size you want */
+}
+
+td {
+  font-size: 14px; /* or any other size you want */
+}
+
+h {
+  padding: 14px;
+  text-align: center;
+}
+
+</style>

@@ -9,44 +9,44 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Data Directory
-DIR = "/home/gmurray/REPO/trading/data"
+DIR = "/home/gmurray/REPO/trading/data-weekly"
 # T-1
-T1 = "/home/gmurray/REPO/trading/data/daily"
+T1 = "/home/gmurray/REPO/trading/data-weekly/daily"
 # T-7
-T7 = "/home/gmurray/REPO/trading/data/weekly"
+T7 = "/home/gmurray/REPO/trading/data-weekly/weekly"
 
 # Files
-MARCH_STRIKES_FILE = f"{DIR}/March-Q1-Options.txt"
-MARCH_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-31MAR23.csv"
-MARCH_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-31MAR23.csv"
-JUNE_STRIKES_FILE = f"{DIR}/June-Q2-Options.txt"
-JUNE_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-30JUN23.csv"
-JUNE_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-30JUN23.csv"
-SEPTEMBER_STRIKES_FILE = f"{DIR}/September-Q3-Options.txt"
-SEPTEMBER_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-29SEP23.csv"
-SEPTEMBER_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-29SEP23.csv"
+NEXT_FRIDAY_STRIKES_FILE = f"{DIR}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-24FEB23.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-24FEB23.csv"
+FOLLOWING_FRIDAY_STRIKES_FILE = f"{DIR}/Following-Fri-Options.txt"
+FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-03MAR23.csv"
+FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-03MAR23.csv"
+THIRD_FRIDAY_STRIKES_FILE = f"{DIR}/Next-Fri-Options.txt"
+THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-10MAR23.csv"
+THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-10MAR23.csv"
 
 # T-1 Files (From Daily)
-MARCH_STRIKES_FILE_T1 = f"{T1}/March-Q1-Options.txt"
-MARCH_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-31MAR23.csv"
-MARCH_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-31MAR23.csv"
-JUNE_STRIKES_FILE_T1 = f"{T1}/June-Q2-Options.txt"
-JUNE_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-30JUN23.csv"
-JUNE_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-30JUN23.csv"
-SEPTEMBER_STRIKES_FILE_T1 = f"{T1}/September-Q3-Options.txt"
-SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-29SEP23.csv"
-SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-29SEP23.csv"
+NEXT_FRIDAY_STRIKES_FILE = f"{T1}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-24FEB23.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-24FEB23.csv"
+FOLLOWING_FRIDAY_STRIKES_FILE = f"{T1}/Following-Fri-Options.txt"
+FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-03MAR23.csv"
+FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-03MAR23.csv"
+THIRD_FRIDAY_STRIKES_FILE = f"{T1}/Next-Fri-Options.txt"
+THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-10MAR23.csv"
+THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-10MAR23.csv"
 
 # T-7 Files (From Weekly)
-MARCH_STRIKES_FILE_T7 = f"{T7}/March-Q1-Options.txt"
-MARCH_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-31MAR23.csv"
-MARCH_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-31MAR23.csv"
-JUNE_STRIKES_FILE_T7 = f"{T7}/June-Q2-Options.txt"
-JUNE_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-30JUN23.csv"
-JUNE_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-30JUN23.csv"
-SEPTEMBER_STRIKES_FILE_T7 = f"{T7}/September-Q3-Options.txt"
-SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-29SEP23.csv"
-SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-29SEP23.csv"
+NEXT_FRIDAY_STRIKES_FILE = f"{T7}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-24FEB23.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-24FEB23.csv"
+FOLLOWING_FRIDAY_STRIKES_FILE = f"{T7}/Following-Fri-Options.txt"
+FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-03MAR23.csv"
+FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-03MAR23.csv"
+THIRD_FRIDAY_STRIKES_FILE = f"{T7}/Next-Fri-Options.txt"
+THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-10MAR23.csv"
+THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-10MAR23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
@@ -150,25 +150,25 @@ def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthl
         print(f"T7 MONTHLY % DIFFERENCE: {round(float(option[6]), 2)}")
     return sorted_options
 
-march_call_table = get_options_table("MARCH", "C", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)
-march_put_table = get_options_table("MARCH", "P", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)
-june_call_table = get_options_table("JUNE", "C", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1, JUNE_LVT_WEEKLY_CSV_FILE_T7, JUNE_LVT_MONTHLY_CSV_FILE_T7)
-june_put_table = get_options_table("JUNE", "P", JUNE_STRIKES_FILE, JUNE_LVT_WEEKLY_CSV_FILE, JUNE_LVT_MONTHLY_CSV_FILE, JUNE_LVT_WEEKLY_CSV_FILE_T1, JUNE_LVT_MONTHLY_CSV_FILE_T1, JUNE_LVT_WEEKLY_CSV_FILE_T7, JUNE_LVT_MONTHLY_CSV_FILE_T7)
-september_call_table = get_options_table("SEPTEMBER", "C", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7)
-september_put_table = get_options_table("SEPTEMBER", "P", SEPTEMBER_STRIKES_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE, SEPTEMBER_LVT_MONTHLY_CSV_FILE, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T1, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T1, SEPTEMBER_LVT_WEEKLY_CSV_FILE_T7, SEPTEMBER_LVT_MONTHLY_CSV_FILE_T7)
+next_friday_call_table = get_options_table("NEXT_FRIDAY", "C", NEXT_FRIDAY_STRIKES_FILE, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
+next_friday_put_table = get_options_table("NEXT_FRIDAY", "P", NEXT_FRIDAY_STRIKES_FILE, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
+following_friday_call_table = get_options_table("FOLLOWING_FRIDAY", "C", FOLLOWING_FRIDAY_STRIKES_FILE, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
+following_friday_put_table = get_options_table("FOLLOWING_FRIDAY", "P", FOLLOWING_FRIDAY_STRIKES_FILE, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
+third_friday_call_table = get_options_table("THIRD_FRIDAY", "C", THIRD_FRIDAY_STRIKES_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
+third_friday_put_table = get_options_table("THIRD_FRIDAY", "P", THIRD_FRIDAY_STRIKES_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
 
 @app.route('/blocked-bets')
 def push_web():
-    march_calls = march_call_table
-    march_puts = march_put_table
-    march_pc_ratio = put_call_ratio(march_calls, march_puts)
-    june_calls = june_call_table
-    june_puts = june_put_table
-    june_pc_ratio = put_call_ratio(june_calls, june_puts)
-    sep_calls = september_call_table
-    sep_puts = september_put_table
-    sep_pc_ratio = put_call_ratio(sep_calls, sep_puts)
-    return render_template('table.html', data_call_march=march_calls, data_put_march=march_puts, data_march_pc_ratio=march_pc_ratio, data_call_june=june_calls, data_put_june=june_puts, data_june_pc_ratio=june_pc_ratio, data_call_sep=sep_calls, data_put_sep=sep_puts, data_sep_pc_ratio=sep_pc_ratio)
+    next_friday_calls = next_friday_call_table
+    next_friday_puts = next_friday_put_table
+    next_friday_pc_ratio = put_call_ratio(next_friday_calls, next_friday_puts)
+    following_friday_calls = following_friday_call_table
+    following_friday_puts = following_friday_put_table
+    following_friday_pc_ratio = put_call_ratio(following_friday_calls, following_friday_puts)
+    third_friday_calls = third_friday_call_table
+    third_friday_puts = third_friday_put_table
+    third_friday_pc_ratio = put_call_ratio(third_friday_calls, third_friday_puts)
+    return render_template('table.html', data_call_next_friday=next_friday_calls, data_put_next_friday=next_friday_puts, data_next_friday_pc_ratio=next_friday_pc_ratio, data_call_following_friday=following_friday_calls, data_put_following_friday=following_friday_puts, data_following_friday_pc_ratio=following_friday_pc_ratio, data_call_third_friday=third_friday_calls, data_put_third_friday=third_friday_puts, data_third_friday_pc_ratio=third_friday_pc_ratio)
 
 if __name__ == '__main__':
     app.run(debug=True)
