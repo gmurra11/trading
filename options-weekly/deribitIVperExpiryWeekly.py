@@ -15,17 +15,17 @@ HISTORICAL_HIGH_IV = 185.90
 
 # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
 NEXT_FRI = "24FEB23"
-FOLLOWING_FRI = "03MAR23"
+FOLLOWING_FRI = "3MAR23"
 THIRD_FRI = "10MAR23"
 
 # Files
 NEXT_FRIDAY_STRIKES_FILE = f"{DIR}/Next-Fri-Options.txt"
 NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{NEXT_FRI}.csv"
 NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{NEXT_FRI}.csv"
-FOLLOWING_FRI_STRIKES_FILE = f"{DIR}/June-Q2-Options.txt"
+FOLLOWING_FRI_STRIKES_FILE = f"{DIR}/Following-Fri-Options.txt"
 FOLLOWING_FRI_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{FOLLOWING_FRI}.csv"
 FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{FOLLOWING_FRI}.csv"
-THIRD_FRI_STRIKES_FILE = f"{DIR}/September-Q3-Options.txt"
+THIRD_FRI_STRIKES_FILE = f"{DIR}/Third-Fri-Options.txt"
 THIRD_FRI_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{THIRD_FRI}.csv"
 THIRD_FRI_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{THIRD_FRI}.csv"
 
@@ -81,14 +81,18 @@ def next_friday_call_table():
         for line in file:
             instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
+            #print(instrument_name)
 
             response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
+            #print(response_instrument_name)
 
             #I need the instrument ID from get_instrument api call
             instrument_details = response_instrument_name.json()
+            #print(instrument_details)
 
             #I pass this to get_order_book_by_instrument_id to get the mark_iv
             query_for_mark_iv = {"instrument_id": instrument_details['result']['instrument_id']}
+            #print(query_for_mark_iv)
 
             response_mark_iv = requests.request("GET", url_order_book, params=query_for_mark_iv)
 
@@ -104,9 +108,9 @@ def next_friday_call_table():
                 monthly_call_totals = extract_call_totals(instrument_name, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
-    march_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    next_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in march_sorted_options:
+    for option in next_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -116,9 +120,15 @@ def next_friday_call_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY CALL TOTALS: {int(option[6])}")
-        print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return march_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY CALL TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY CALL TOTALS: {int(option[7])}")
+    return next_friday_sorted_options
 
 def next_friday_put_table():
     options = []
@@ -149,9 +159,9 @@ def next_friday_put_table():
                 monthly_put_totals = extract_put_totals(instrument_name, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
-    march_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    next_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in march_sorted_options:
+    for option in next_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -161,9 +171,15 @@ def next_friday_put_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
-        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return march_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return next_friday_sorted_options
 
 def following_friday_call_table():
     options = []
@@ -171,14 +187,17 @@ def following_friday_call_table():
         for line in file:
             instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
+            #print(query_instrument_name)
 
             response_instrument_name = requests.request("GET", url_instrument_id, params=query_instrument_name)
 
             #I need the instrument ID from get_instrument api call
             instrument_details = response_instrument_name.json()
+            #print(instrument_details)
 
             #I pass this to get_order_book_by_instrument_id to get the mark_iv
             query_for_mark_iv = {"instrument_id": instrument_details['result']['instrument_id']}
+            #print(query_for_mark_iv)
 
             response_mark_iv = requests.request("GET", url_order_book, params=query_for_mark_iv)
 
@@ -194,9 +213,9 @@ def following_friday_call_table():
                 monthly_call_totals = extract_call_totals(instrument_name, FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
-    june_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    following_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in june_sorted_options:
+    for option in following_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -206,9 +225,15 @@ def following_friday_call_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY CALL TOTALS: {int(option[6])}")
-        print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return june_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY CALL TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY CALL TOTALS: {int(option[7])}")
+    return following_friday_sorted_options
 
 def following_friday_put_table():
     options = []
@@ -239,9 +264,9 @@ def following_friday_put_table():
                 monthly_put_totals = extract_put_totals(instrument_name, FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
-    june_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    following_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in june_sorted_options:
+    for option in following_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -251,9 +276,15 @@ def following_friday_put_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
-        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return june_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return following_friday_sorted_options
 
 def third_friday_call_table():
     options = []
@@ -284,9 +315,9 @@ def third_friday_call_table():
                 monthly_call_totals = extract_call_totals(instrument_name, THIRD_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
-    september_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    third_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in september_sorted_options:
+    for option in third_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -295,9 +326,15 @@ def third_friday_call_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY CALL TOTALS: {int(option[6])}")
-        print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return september_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY CALL TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY CALL TOTALS: {int(option[7])}")
+    return third_friday_sorted_options
 
 def third_friday_put_table():
     options = []
@@ -328,9 +365,9 @@ def third_friday_put_table():
                 monthly_put_totals = extract_put_totals(instrument_name, THIRD_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
-    september_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
+    third_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
 
-    for option in september_sorted_options:
+    for option in third_friday_sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"IV: {option[1]:.2f}%")
         print(f"IVR: {option[2]:.2f}%")
@@ -339,19 +376,25 @@ def third_friday_put_table():
             print(f"VOL: None")
         else:
             print(f"VOL: {int(option[5])}")
-        print(f"WEEKLY PUT TOTALS: {int(option[6])}")
-        print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return september_sorted_options
+        if option[6] is None or option[6] == "":
+            print(f"VOL: None")
+        else:
+            print(f"WEEKLY PUT TOTALS: {int(option[6])}")
+        if option[7] is None or option[7] == "":
+            print(f"VOL: None")
+        else:
+            print(f"MONTHLY PUT TOTALS: {int(option[7])}")
+    return third_friday_sorted_options
 
 @app.route('/iv-per-expiry-weekly')
 def push_web():
-    march_call = march_call_table()
-    march_put = march_put_table()
-    june_call = june_call_table()
-    june_put = june_put_table()
-    sep_call = september_call_table()
-    sep_put = september_put_table()
-    return render_template('table.html', data_march_call=march_call, data_march_put=march_put, data_june_call=june_call, data_june_put=june_put, data_sep_call=sep_call, data_sep_put=sep_put)
+    next_friday_call = next_friday_call_table()
+    next_friday_put = next_friday_put_table()
+    following_friday_call = following_friday_call_table()
+    following_friday_put = following_friday_put_table()
+    third_friday_call = third_friday_call_table()
+    third_friday_put = third_friday_put_table()
+    return render_template('table.html', data_next_friday_call=next_friday_call, data_next_friday_put=next_friday_put, data_following_friday_call=following_friday_call, data_following_friday_put=following_friday_put, data_third_friday_call=third_friday_call, data_third_friday_put=third_friday_put)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5003)

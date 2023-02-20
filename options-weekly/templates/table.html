@@ -1,6 +1,6 @@
 <div class="table-container">
   <div class="table-wrapper">
-      <h2>March Call Options</h2>
+      <h2>Next Friday's Call Options</h2>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
@@ -13,7 +13,7 @@
           <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
           <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
         </tr>
-        {% for option in data_march_call %}
+        {% for option in data_next_friday_call %}
         <tr style="background-color: lightgreen;">
           <td style="padding: 8px;">{{ loop.index }}</td>
           <td style="padding: 8px;">{{ option[0] }}</td>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="table-wrapper">
-        <h2>March Put Options</h2>
+        <h2>Next Friday's Put Options</h2>
         <table border="1" style="border-collapse: collapse;">
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">#</th>
@@ -43,7 +43,7 @@
             <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
             <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
           </tr>
-          {% for option in data_march_put %}
+          {% for option in data_next_friday_put %}
           <tr style="background-color: lightpink;">
             <td style="padding: 8px;">{{ loop.index }}</td>
             <td style="padding: 8px;">{{ option[0] }}</td>
@@ -62,7 +62,7 @@
 
 <div class="table-container">
   <div class="table-wrapper">
-    <h2>June Call Options</h2>
+    <h2>Following Friday's Call Options</h2>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -75,7 +75,7 @@
         <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
         <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
       </tr>
-      {% for option in data_june_call %}
+      {% for option in data_following_friday_call %}
       <tr style="background-color: lightgreen;">
         <td style="padding: 8px;">{{ loop.index }}</td>
         <td style="padding: 8px;">{{ option[0] }}</td>
@@ -92,7 +92,7 @@
   </div>
 
   <div class="table-wrapper">
-    <h2>June Put Options</h2>
+    <h2>Following Friday's Put Options</h2>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -105,7 +105,7 @@
         <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
         <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
       </tr>
-      {% for option in data_june_put %}
+      {% for option in data_following_friday_put %}
       <tr style="background-color: lightpink;">
         <td style="padding: 8px;">{{ loop.index }}</td>
         <td style="padding: 8px;">{{ option[0] }}</td>
@@ -124,7 +124,7 @@
 
 <div class="table-container">
   <div class="table-wrapper">
-    <h2>September Call Options</h2>
+    <h2>Third Friday's Call Options</h2>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -137,7 +137,7 @@
         <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
         <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
       </tr>
-      {% for option in data_sep_call %}
+      {% for option in data_third_friday_call %}
       <tr style="background-color: lightgreen;">
         <td style="padding: 8px;">{{ loop.index }}</td>
         <td style="padding: 8px;">{{ option[0] }}</td>
@@ -154,7 +154,7 @@
   </div>
 
   <div class="table-wrapper">
-    <h2>September Put Options</h2>
+    <h2>Third Friday's Put Options</h2>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -167,7 +167,7 @@
         <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
         <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
       </tr>
-      {% for option in data_sep_put %}
+      {% for option in data_third_friday_put %}
       <tr style="background-color: lightpink;">
         <td style="padding: 8px;">{{ loop.index }}</td>
         <td style="padding: 8px;">{{ option[0] }}</td>

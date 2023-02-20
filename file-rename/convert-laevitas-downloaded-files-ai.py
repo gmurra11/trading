@@ -67,7 +67,7 @@ def main():
 
     # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
     next_fri = "24FEB23"
-    following_fri = "03MAR23"
+    following_fri = "3MAR23"
     third_fri = "10MAR23"
 
     previous_next_fri = "31MAR23"
