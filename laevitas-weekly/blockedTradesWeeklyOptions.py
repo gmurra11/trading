@@ -157,7 +157,7 @@ following_friday_put_table = get_options_table("FOLLOWING_FRIDAY", "P", FOLLOWIN
 third_friday_call_table = get_options_table("THIRD_FRIDAY", "C", THIRD_FRIDAY_STRIKES_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
 third_friday_put_table = get_options_table("THIRD_FRIDAY", "P", THIRD_FRIDAY_STRIKES_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T1, THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T7, THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T7)
 
-@app.route('/blocked-bets')
+@app.route('/blocked-bets-weekly-options')
 def push_web():
     next_friday_calls = next_friday_call_table
     next_friday_puts = next_friday_put_table

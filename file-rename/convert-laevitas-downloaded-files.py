@@ -5,14 +5,23 @@ import shutil
 # Original files directory
 src_dir = "/home/gmurray/Downloads"
 
-# Output directory
-dst_dir = "/home/gmurray/REPO/trading/data-quarterly"
+# Output directory quarterly
+dst_dir_quarterly_options = "/home/gmurray/REPO/trading/data-quarterly"
 
-# Daily output directory
-daily_dir = "/home/gmurray/REPO/trading/data-quarterly/daily"
+# Output directory weekly
+dst_dir_weekly_options = "/home/gmurray/REPO/trading/data-weekly"
 
-# Weekly output directory
-weekly_dir = "/home/gmurray/REPO/trading/data-quarterly/weekly"
+# Daily output directory for quaterly data
+daily_dir_quarterly_options = "/home/gmurray/REPO/trading/data-quarterly/daily"
+
+# Weekly output directory for quaterly data
+weekly_dir_quarterly_options = "/home/gmurray/REPO/trading/data-quarterly/weekly"
+
+# Daily output directory for weekly data
+daily_dir_weekly_options = "/home/gmurray/REPO/trading/data-weekly/daily"
+
+# Weekly output directory for weekly data
+weekly_dir_weekly_options = "/home/gmurray/REPO/trading/data-weekly/weekly"
 
 # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
 next_fri = "24FEB23"
@@ -39,7 +48,7 @@ filename_map_weekly = {
 }
 
 # Get the modification time of the destination directory
-dst_dir_stat = os.stat(dst_dir)
+dst_dir_stat = os.stat(dst_dir_quarterly_options)
 dst_dir_mod_time = dst_dir_stat.st_mtime
 
 # Get the current date and time
@@ -49,28 +58,28 @@ current_date = datetime.datetime.now().date()
 # and move the old files with names starting with "LVT-" to the daily directory
 # if the modification time of the destination directory is not today
 if datetime.datetime.fromtimestamp(dst_dir_mod_time).date() != current_date:
-    for filename in os.listdir(daily_dir):
+    for filename in os.listdir(daily_dir_quarterly_options):
         if filename.startswith("LVT-"):
-            os.remove(os.path.join(daily_dir, filename))
+            os.remove(os.path.join(daily_dir_quarterly_options, filename))
 
-    for filename in os.listdir(dst_dir):
+    for filename in os.listdir(dst_dir_quarterly_options):
         if filename.startswith("LVT-"):
-            src_path = os.path.join(dst_dir, filename)
-            dst_path = os.path.join(daily_dir, filename)
+            src_path = os.path.join(dst_dir_quarterly_options, filename)
+            dst_path = os.path.join(daily_dir_quarterly_options, filename)
             os.rename(src_path, dst_path)
 
     # Copy daily files to weekly directory if it's Sunday
     if current_date.weekday() == 6:
-        for filename in os.listdir(daily_dir):
+        for filename in os.listdir(daily_dir_quarterly_options):
             if filename.startswith("LVT-"):
-                src_path = os.path.join(daily_dir, filename)
-                dst_path = os.path.join(weekly_dir, filename)
+                src_path = os.path.join(daily_dir_quarterly_options, filename)
+                dst_path = os.path.join(weekly_dir_quarterly_options, filename)
                 shutil.copy2(src_path, dst_path)
 
 # Delete existing files in the destination directory
-for filename in os.listdir(dst_dir):
+for filename in os.listdir(dst_dir_quarterly_options):
     if filename in filename_map_quarterly.values():
-        os.remove(os.path.join(dst_dir, filename))
+        os.remove(os.path.join(dst_dir_quarterly_options, filename))
 
 # Loop through the files in the source directory
 for filename in os.listdir(src_dir):
@@ -78,7 +87,7 @@ for filename in os.listdir(src_dir):
     if filename in filename_map_quarterly:
         # Construct the source and destination paths
         src_path = os.path.join(src_dir, filename)
-        dst_path = os.path.join(dst_dir, filename_map_quarterly[filename])
+        dst_path = os.path.join(dst_dir_quarterly_options, filename_map_quarterly[filename])
 
         # Rename the file
         os.rename(src_path, dst_path)

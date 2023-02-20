@@ -7,7 +7,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Data Directory
-DIR = "/home/gmurray/REPO/trading/data"
+DIR = "/home/gmurray/REPO/trading/data-quarterly"
 
 # Constants
 HISTORICAL_LOW_IV = 15.55
@@ -338,7 +338,7 @@ def september_put_table():
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
     return september_sorted_options
 
-@app.route('/iv-per-expiry')
+@app.route('/iv-per-expiry-quarterly')
 def push_web():
     march_call = march_call_table()
     march_put = march_put_table()
