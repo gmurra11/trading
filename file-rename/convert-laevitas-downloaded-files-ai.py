@@ -1,6 +1,8 @@
 import os
 import datetime
 import shutil
+import fileinput
+import re
 
 def delete_old_files(directory):
     current_date = datetime.datetime.now().date()
@@ -39,7 +41,6 @@ def rename_files(src_directory, dst_directory, filename_map):
         if filename in filename_map:
             src_path = os.path.join(src_directory, filename)
             dst_path = os.path.join(dst_directory, filename_map[filename])
-            print(dst_path)
             os.rename(src_path, dst_path)
 
 def main():
@@ -66,8 +67,31 @@ def main():
 
     # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
     next_fri = "24FEB23"
-    follwoing_fri = "03MAR23"
+    following_fri = "03MAR23"
     third_fri = "10MAR23"
+
+    previous_next_fri = "31MAR23"
+    previous_following_fri = "30JUN23"
+    previous_third_fri = "29SEP23"
+
+    #  Update data files with the list of strike using above constants
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_next_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Next-Fri-Options.txt', inplace=True):
+        if pattern.search(line):
+            line = line.replace(previous_next_fri, next_fri)
+        print(line, end='')
+
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_following_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Following-Fri-Options.txt', inplace=True):
+        if pattern.search(line):
+            line = line.replace(previous_following_fri, following_fri)
+        print(line, end='')
+
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_third_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Third-Fri-Options.txt', inplace=True):
+        if pattern.search(line):
+            line = line.replace(previous_third_fri, third_fri)
+        print(line, end='')
 
     # Get the current date and time
     current_date = datetime.datetime.now().date()
@@ -84,10 +108,10 @@ def main():
 
     filename_map_weekly = {
         f"lvt_chart ETH Buy_Sell Volume Last  Month {next_fri} .csv": f"LVT-MONTHLY-{next_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {follwoing_fri} .csv": f"LVT-MONTHLY-{follwoing_fri}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  Month {following_fri} .csv": f"LVT-MONTHLY-{following_fri}.csv",
         f"lvt_chart ETH Buy_Sell Volume Last  Month {third_fri} .csv": f"LVT-MONTHLY-{third_fri}.csv",
         f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {next_fri} .csv": f"LVT-WEEKLY-{next_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {follwoing_fri} .csv": f"LVT-WEEKLY-{follwoing_fri}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {following_fri} .csv": f"LVT-WEEKLY-{following_fri}.csv",
         f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {third_fri} .csv": f"LVT-WEEKLY-{third_fri}.csv"
     }
 

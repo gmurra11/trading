@@ -7,22 +7,27 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Data Directory
-DIR = "/home/gmurray/REPO/trading/data-quarterly"
+DIR = "/home/gmurray/REPO/trading/data-weekly"
 
 # Constants
 HISTORICAL_LOW_IV = 15.55
 HISTORICAL_HIGH_IV = 185.90
 
+# Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
+NEXT_FRI = "24FEB23"
+FOLLOWING_FRI = "03MAR23"
+THIRD_FRI = "10MAR23"
+
 # Files
-MARCH_STRIKES_FILE = f"{DIR}/March-Q1-Options.txt"
-MARCH_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-31MAR23.csv"
-MARCH_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-31MAR23.csv"
-JUNE_STRIKES_FILE = f"{DIR}/June-Q2-Options.txt"
-JUNE_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-30JUN23.csv"
-JUNE_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-30JUN23.csv"
-SEPTEMBER_STRIKES_FILE = f"{DIR}/September-Q3-Options.txt"
-SEPTEMBER_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-29SEP23.csv"
-SEPTEMBER_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-29SEP23.csv"
+NEXT_FRIDAY_STRIKES_FILE = f"{DIR}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{NEXT_FRI}.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{NEXT_FRI}.csv"
+FOLLOWING_FRI_STRIKES_FILE = f"{DIR}/June-Q2-Options.txt"
+FOLLOWING_FRI_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{FOLLOWING_FRI}.csv"
+FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{FOLLOWING_FRI}.csv"
+THIRD_FRI_STRIKES_FILE = f"{DIR}/September-Q3-Options.txt"
+THIRD_FRI_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-{THIRD_FRI}.csv"
+THIRD_FRI_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-{THIRD_FRI}.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
@@ -70,9 +75,9 @@ def extract_put_totals(instrument_name, csv_file):
                 puts_total = puts_buy + puts_sell
                 return puts_total
 
-def march_call_table():
+def next_friday_call_table():
     options = []
-    with open(MARCH_STRIKES_FILE, "r") as file:
+    with open(NEXT_FRIDAY_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -95,8 +100,8 @@ def march_call_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_call_totals = extract_call_totals(instrument_name, MARCH_LVT_WEEKLY_CSV_FILE)
-                monthly_call_totals = extract_call_totals(instrument_name, MARCH_LVT_MONTHLY_CSV_FILE)
+                weekly_call_totals = extract_call_totals(instrument_name, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE)
+                monthly_call_totals = extract_call_totals(instrument_name, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
     march_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
@@ -115,9 +120,9 @@ def march_call_table():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return march_sorted_options
 
-def march_put_table():
+def next_friday_put_table():
     options = []
-    with open(MARCH_STRIKES_FILE, "r") as file:
+    with open(NEXT_FRIDAY_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "P"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -140,8 +145,8 @@ def march_put_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_put_totals = extract_put_totals(instrument_name, MARCH_LVT_WEEKLY_CSV_FILE)
-                monthly_put_totals = extract_put_totals(instrument_name, MARCH_LVT_MONTHLY_CSV_FILE)
+                weekly_put_totals = extract_put_totals(instrument_name, NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
     march_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
@@ -160,9 +165,9 @@ def march_put_table():
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
     return march_sorted_options
 
-def june_call_table():
+def following_friday_call_table():
     options = []
-    with open(JUNE_STRIKES_FILE, "r") as file:
+    with open(FOLLOWING_FRI_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -185,8 +190,8 @@ def june_call_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_call_totals = extract_call_totals(instrument_name, JUNE_LVT_WEEKLY_CSV_FILE)
-                monthly_call_totals = extract_call_totals(instrument_name, JUNE_LVT_MONTHLY_CSV_FILE)
+                weekly_call_totals = extract_call_totals(instrument_name, FOLLOWING_FRI_LVT_WEEKLY_CSV_FILE)
+                monthly_call_totals = extract_call_totals(instrument_name, FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
     june_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
@@ -205,9 +210,9 @@ def june_call_table():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return june_sorted_options
 
-def june_put_table():
+def following_friday_put_table():
     options = []
-    with open(JUNE_STRIKES_FILE, "r") as file:
+    with open(FOLLOWING_FRI_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "P"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -230,8 +235,8 @@ def june_put_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_put_totals = extract_put_totals(instrument_name, JUNE_LVT_WEEKLY_CSV_FILE)
-                monthly_put_totals = extract_put_totals(instrument_name, JUNE_LVT_MONTHLY_CSV_FILE)
+                weekly_put_totals = extract_put_totals(instrument_name, FOLLOWING_FRI_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, FOLLOWING_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
     june_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
@@ -250,9 +255,9 @@ def june_put_table():
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
     return june_sorted_options
 
-def september_call_table():
+def third_friday_call_table():
     options = []
-    with open(SEPTEMBER_STRIKES_FILE, "r") as file:
+    with open(THIRD_FRI_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "C"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -275,8 +280,8 @@ def september_call_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_call_totals = extract_call_totals(instrument_name, SEPTEMBER_LVT_WEEKLY_CSV_FILE)
-                monthly_call_totals = extract_call_totals(instrument_name, SEPTEMBER_LVT_MONTHLY_CSV_FILE)
+                weekly_call_totals = extract_call_totals(instrument_name, THIRD_FRI_LVT_WEEKLY_CSV_FILE)
+                monthly_call_totals = extract_call_totals(instrument_name, THIRD_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_call_totals, monthly_call_totals))
 
     september_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))
@@ -294,9 +299,9 @@ def september_call_table():
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
     return september_sorted_options
 
-def september_put_table():
+def third_friday_put_table():
     options = []
-    with open(SEPTEMBER_STRIKES_FILE, "r") as file:
+    with open(THIRD_FRI_STRIKES_FILE, "r") as file:
         for line in file:
             instrument_name = line.strip() + "P"  #appending C for Call to the name
             query_instrument_name = {"instrument_name": instrument_name}
@@ -319,8 +324,8 @@ def september_put_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
-                weekly_put_totals = extract_put_totals(instrument_name, SEPTEMBER_LVT_WEEKLY_CSV_FILE)
-                monthly_put_totals = extract_put_totals(instrument_name, SEPTEMBER_LVT_MONTHLY_CSV_FILE)
+                weekly_put_totals = extract_put_totals(instrument_name, THIRD_FRI_LVT_WEEKLY_CSV_FILE)
+                monthly_put_totals = extract_put_totals(instrument_name, THIRD_FRI_LVT_MONTHLY_CSV_FILE)
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol, weekly_put_totals, monthly_put_totals))
 
     september_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))

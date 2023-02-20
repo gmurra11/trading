@@ -27,26 +27,26 @@ THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{DIR}/LVT-WEEKLY-10MAR23.csv"
 THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{DIR}/LVT-MONTHLY-10MAR23.csv"
 
 # T-1 Files (From Daily)
-NEXT_FRIDAY_STRIKES_FILE = f"{T1}/Next-Fri-Options.txt"
-NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-24FEB23.csv"
-NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-24FEB23.csv"
-FOLLOWING_FRIDAY_STRIKES_FILE = f"{T1}/Following-Fri-Options.txt"
-FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-03MAR23.csv"
-FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-03MAR23.csv"
-THIRD_FRIDAY_STRIKES_FILE = f"{T1}/Next-Fri-Options.txt"
-THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T1}/LVT-WEEKLY-10MAR23.csv"
-THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T1}/LVT-MONTHLY-10MAR23.csv"
+NEXT_FRIDAY_STRIKES_FILE_T1 = f"{T1}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-24FEB23.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-24FEB23.csv"
+FOLLOWING_FRIDAY_STRIKES_FILE_T1 = f"{T1}/Following-Fri-Options.txt"
+FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-03MAR23.csv"
+FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-03MAR23.csv"
+THIRD_FRIDAY_STRIKES_FILE_T1 = f"{T1}/Next-Fri-Options.txt"
+THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T1 = f"{T1}/LVT-WEEKLY-10MAR23.csv"
+THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T1 = f"{T1}/LVT-MONTHLY-10MAR23.csv"
 
 # T-7 Files (From Weekly)
-NEXT_FRIDAY_STRIKES_FILE = f"{T7}/Next-Fri-Options.txt"
-NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-24FEB23.csv"
-NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-24FEB23.csv"
-FOLLOWING_FRIDAY_STRIKES_FILE = f"{T7}/Following-Fri-Options.txt"
-FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-03MAR23.csv"
-FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-03MAR23.csv"
-THIRD_FRIDAY_STRIKES_FILE = f"{T7}/Next-Fri-Options.txt"
-THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE = f"{T7}/LVT-WEEKLY-10MAR23.csv"
-THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE = f"{T7}/LVT-MONTHLY-10MAR23.csv"
+NEXT_FRIDAY_STRIKES_FILE_T7 = f"{T7}/Next-Fri-Options.txt"
+NEXT_FRIDAY_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-24FEB23.csv"
+NEXT_FRIDAY_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-24FEB23.csv"
+FOLLOWING_FRIDAY_STRIKES_FILE_T7 = f"{T7}/Following-Fri-Options.txt"
+FOLLOWING_FRIDAY_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-03MAR23.csv"
+FOLLOWING_FRIDAY_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-03MAR23.csv"
+THIRD_FRIDAY_STRIKES_FILE_T7 = f"{T7}/Next-Fri-Options.txt"
+THIRD_FRIDAY_LVT_WEEKLY_CSV_FILE_T7 = f"{T7}/LVT-WEEKLY-10MAR23.csv"
+THIRD_FRIDAY_LVT_MONTHLY_CSV_FILE_T7 = f"{T7}/LVT-MONTHLY-10MAR23.csv"
 
 # Read the configuration file
 config = configparser.ConfigParser()
@@ -171,4 +171,4 @@ def push_web():
     return render_template('table.html', data_call_next_friday=next_friday_calls, data_put_next_friday=next_friday_puts, data_next_friday_pc_ratio=next_friday_pc_ratio, data_call_following_friday=following_friday_calls, data_put_following_friday=following_friday_puts, data_following_friday_pc_ratio=following_friday_pc_ratio, data_call_third_friday=third_friday_calls, data_put_third_friday=third_friday_puts, data_third_friday_pc_ratio=third_friday_pc_ratio)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5002)
