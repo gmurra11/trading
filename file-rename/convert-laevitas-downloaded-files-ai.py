@@ -98,9 +98,19 @@ def main():
     # Format the date to include a leading zero if the day is a single digit; this is a hack.  Strikes are a single digit, Laevitas files are two digits; eg: 3MAR or 03MAR
     formatted_date = current_date.strftime('%d%b%y') if current_date.day > 9 else current_date.strftime('0%d%b%y')
 
-    next_fri_formatted = next_fri[:2] + formatted_date[2:]
-    following_fri_formatted = following_fri[:2] + formatted_date[2:]
-    third_fri_formatted = third_fri[:2] + formatted_date[2:]
+    # Parse the constants into datetime objects
+    next_fri_date = datetime.datetime.strptime(next_fri, '%d%b%y')
+    following_fri_date = datetime.datetime.strptime(following_fri, '%d%b%y')
+    third_fri_date = datetime.datetime.strptime(third_fri, '%d%b%y')
+
+    # Format the parsed constants using the formatted date
+    next_fri_formatted = next_fri_date.strftime('%d%b%y').upper()
+    following_fri_formatted = following_fri_date.strftime('%d%b%y').upper()
+    third_fri_formatted = third_fri_date.strftime('%d%b%y').upper()
+
+    print(next_fri_formatted)
+    print(following_fri_formatted)
+    print(third_fri_formatted)
 
     # Mapping of old filenames to new filenames
     filename_map_quarterly = {
