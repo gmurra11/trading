@@ -95,6 +95,12 @@ def main():
 
     # Get the current date and time
     current_date = datetime.datetime.now().date()
+    # Format the date to include a leading zero if the day is a single digit; this is a hack.  Strikes are a single digit, Laevitas files are two digits; eg: 3MAR or 03MAR
+    formatted_date = current_date.strftime('%d%b%y') if current_date.day > 9 else current_date.strftime('0%d%b%y')
+
+    next_fri_formatted = next_fri[:2] + formatted_date[2:]
+    following_fri_formatted = following_fri[:2] + formatted_date[2:]
+    third_fri_formatted = third_fri[:2] + formatted_date[2:]
 
     # Mapping of old filenames to new filenames
     filename_map_quarterly = {
@@ -107,14 +113,13 @@ def main():
     }
 
     filename_map_weekly = {
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {next_fri} .csv": f"LVT-MONTHLY-{next_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {following_fri} .csv": f"LVT-MONTHLY-{following_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {third_fri} .csv": f"LVT-MONTHLY-{third_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {next_fri} .csv": f"LVT-WEEKLY-{next_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {following_fri} .csv": f"LVT-WEEKLY-{following_fri}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {third_fri} .csv": f"LVT-WEEKLY-{third_fri}.csv"
+        f"lvt_chart ETH Buy_Sell Volume Last  Month {next_fri_formatted} .csv": f"LVT-MONTHLY-{next_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  Month {following_fri_formatted} .csv": f"LVT-MONTHLY-{following_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  Month {third_fri_formatted} .csv": f"LVT-MONTHLY-{third_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {next_fri_formatted} .csv": f"LVT-WEEKLY-{next_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {following_fri_formatted} .csv": f"LVT-WEEKLY-{following_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {third_fri_formatted} .csv": f"LVT-WEEKLY-{third_fri_formatted}.csv"
     }
-
 
     # WEEKLY DIRECTROY CLEAN UP
     if current_date.weekday() == 6:
@@ -136,7 +141,7 @@ def main():
     # Delete old files from daily directory for weekly data
     delete_old_files(daily_dir_weekly_options)
 
-    # Get the modification time of the destination directory, ie:have we run today already and is this a snapshot
+    # Get the modification time of the destination directory, ie:have we run today already or is this a snapshot?
     dst_dir_quarterly_options_stat = os.stat(dst_dir_quarterly_options)
     dst_dir_quarterly_options_mod_time = dst_dir_quarterly_options_stat.st_mtime
     dst_dir_weekly_options_stat = os.stat(dst_dir_weekly_options)
