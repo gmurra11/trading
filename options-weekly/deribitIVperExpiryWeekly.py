@@ -15,7 +15,7 @@ HISTORICAL_HIGH_IV = 185.90
 
 # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
 NEXT_FRI = "24FEB23"
-FOLLOWING_FRI = "3MAR23"
+FOLLOWING_FRI = "03MAR23"
 THIRD_FRI = "10MAR23"
 
 # Files
