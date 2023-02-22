@@ -16,8 +16,5 @@ for script in scripts:
     script_path = os.path.join(base_dir, script)
     # Stop the script
     os.system(f"pkill -f {script_path}")
-    # Start the script
-    os.system(f"python3 {script_path} &")
-
 
 #ps command to view pids:  ps -ef | grep python3 | grep py | grep -v grep

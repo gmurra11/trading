@@ -53,6 +53,9 @@ def main():
     # Output directory weekly
     dst_dir_weekly_options = "/home/gmurray/REPO/trading/data-weekly"
 
+    # Output directory skew
+    dst_dir_skew_options = "/home/gmurray/REPO/trading/data-skew"
+
     # Daily output directory for quaterly data
     daily_dir_quarterly_options = "/home/gmurray/REPO/trading/data-quarterly/daily"
 
@@ -64,6 +67,12 @@ def main():
 
     # Weekly output directory for weekly data
     weekly_dir_weekly_options = "/home/gmurray/REPO/trading/data-weekly/weekly"
+
+    # Daily output directory for skew data
+    daily_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/daily"
+
+    # Weekly output directory for skew data
+    weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/weekly"
 
     # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
     next_fri = "24FEB23"
@@ -131,6 +140,11 @@ def main():
         f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {third_fri_formatted} .csv": f"LVT-WEEKLY-{third_fri_formatted}.csv"
     }
 
+    filename_map_skew = {
+        f"lvt_chart ETH Skew 25Δ 1D .csv": f"LVT-SKEW25.csv",
+    }
+
+
     # WEEKLY DIRECTROY CLEAN UP
     if current_date.weekday() == 6:
         # Delete existing files from weekly directory for quarterly data
@@ -145,17 +159,29 @@ def main():
         # Copy files to weekly directory for weekly data
         copy_files_to_weekly_directory(daily_dir_weekly_options, weekly_dir_weekly_options)
 
+    # SKEW DIRECTROY CLEAN UP
+    if current_date.weekday() == 6:
+        # Delete existing files from weekly directory for weekly data
+        delete_existing_files(weekly_dir_skew_options, filename_map_skew)
+        # Copy files to weekly directory for weekly data
+        copy_files_to_weekly_directory(daily_dir_skew_options, weekly_dir_skew_options)
+
     # Delete old files from daily directory for quarterly data
     delete_old_files(daily_dir_quarterly_options)
 
     # Delete old files from daily directory for weekly data
     delete_old_files(daily_dir_weekly_options)
 
+    # Delete old files from daily directory for weekly data
+    delete_old_files(daily_dir_skew_options)
+
     # Get the modification time of the destination directory, ie:have we run today already or is this a snapshot?
     dst_dir_quarterly_options_stat = os.stat(dst_dir_quarterly_options)
     dst_dir_quarterly_options_mod_time = dst_dir_quarterly_options_stat.st_mtime
     dst_dir_weekly_options_stat = os.stat(dst_dir_weekly_options)
     dst_dir_weekly_options_mod_time = dst_dir_weekly_options_stat.st_mtime
+    dst_dir_skew_options_stat = os.stat(dst_dir_skew_options)
+    dst_dir_skew_options_mod_time = dst_dir_skew_options_stat.st_mtime
 
     # Move files to daily directory for quarterly data
     if datetime.datetime.fromtimestamp(dst_dir_quarterly_options_mod_time).date() != current_date:
@@ -165,11 +191,18 @@ def main():
     if datetime.datetime.fromtimestamp(dst_dir_weekly_options_mod_time).date() != current_date:
         move_files_to_daily_directory(dst_dir_weekly_options, daily_dir_weekly_options)
 
+    # Move files to daily directory for skew data
+    if datetime.datetime.fromtimestamp(dst_dir_skew_options_mod_time).date() != current_date:
+        move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
+
     # Rename files in source directory for quarterly data
     rename_files(src_dir, dst_dir_quarterly_options, filename_map_quarterly)
 
     # Rename files in source directory for weekly data
     rename_files(src_dir, dst_dir_weekly_options, filename_map_weekly)
+
+    # Rename files in source directory for skew data
+    rename_files(src_dir, dst_dir_skew_options, filename_map_skew)
 
 if __name__ == "__main__":
     main()
