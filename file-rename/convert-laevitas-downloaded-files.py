@@ -117,10 +117,6 @@ def main():
     following_fri_formatted = following_fri_date.strftime('%d%b%y').upper()
     third_fri_formatted = third_fri_date.strftime('%d%b%y').upper()
 
-    print(next_fri_formatted)
-    print(following_fri_formatted)
-    print(third_fri_formatted)
-
     # Mapping of old filenames to new filenames
     filename_map_quarterly = {
         "lvt_chart ETH Buy_Sell Volume Last  Month 31MAR23 .csv": "LVT-MONTHLY-31MAR23.csv",
@@ -141,9 +137,8 @@ def main():
     }
 
     filename_map_skew = {
-        f"lvt_chart ETH Skew 25Δ 1D .csv": f"LVT-SKEW25.csv",
+        f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25.csv",
     }
-
 
     # WEEKLY DIRECTROY CLEAN UP
     if current_date.weekday() == 6:
