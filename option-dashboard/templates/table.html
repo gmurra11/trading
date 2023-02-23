@@ -1,0 +1,83 @@
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>ETH Delta 25 Skew</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Current 25 Delta Skew</th>
+          <th style="padding: 8px;">T1 25 Delta Skew</th>
+          <th style="padding: 8px;">T1 % Change</th>
+          <th style="padding: 8px;">T7 25 Delta Skew</th>
+          <th style="padding: 8px;">T7 % Change</th>
+        </tr>
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_avg_skew }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_avg_skew_t1 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t1 }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_t7 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t7 }}</td>
+        </tr>
+      </table>
+    </div>
+</div>
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>ETH Delta 25 IV Changes</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Current 25 Delta IV</th>
+          <th style="padding: 8px;">Yesterday's 25 Delta IV</th>
+          <th style="padding: 8px;">T1 % Change</th>
+          <th style="padding: 8px;">Last Week's 25 Delta IV</th>
+          <th style="padding: 8px;">T7 % Change</th>
+          <th style="padding: 8px;">Last Months's 25 Delta IV</th>
+          <th style="padding: 8px;">T30 % Change</th>
+        </tr>
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_eth_iv_today }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_eth_iv_yesterday }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_eth_iv_yesterday_chg }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_eth_iv_last_week }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_eth_iv_last_week_chg }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_eth_iv_last_month }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_eth_iv_last_month_chg }}</td>
+        </tr>
+      </table>
+    </div>
+</div>
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>BTC Delta 25 IV Changes</h2>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">Current 25 Delta IV</th>
+          <th style="padding: 8px;">Yesterday's 25 Delta IV</th>
+          <th style="padding: 8px;">T1 % Change</th>
+          <th style="padding: 8px;">Last Week's 25 Delta IV</th>
+          <th style="padding: 8px;">T7 % Change</th>
+          <th style="padding: 8px;">Last Months's 25 Delta IV</th>
+          <th style="padding: 8px;">T30 % Change</th>
+        </tr>
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_btc_iv_today }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_btc_iv_yesterday }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_btc_iv_yesterday_chg }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_btc_iv_last_week }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_btc_iv_last_week_chg }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_btc_iv_last_month }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_btc_iv_last_month_chg }}</td>
+        </tr>
+      </table>
+    </div>
+</div>
+
+<style>
+.table-container {
+  display: flex;
+}
+
+.table-wrapper {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+</style>

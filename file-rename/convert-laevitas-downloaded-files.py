@@ -138,6 +138,8 @@ def main():
 
     filename_map_skew = {
         f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25.csv",
+        f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
+        f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv"
     }
 
     # WEEKLY DIRECTROY CLEAN UP
@@ -161,15 +163,6 @@ def main():
         # Copy files to weekly directory for weekly data
         copy_files_to_weekly_directory(daily_dir_skew_options, weekly_dir_skew_options)
 
-    # Delete old files from daily directory for quarterly data
-    delete_old_files(daily_dir_quarterly_options)
-
-    # Delete old files from daily directory for weekly data
-    delete_old_files(daily_dir_weekly_options)
-
-    # Delete old files from daily directory for weekly data
-    delete_old_files(daily_dir_skew_options)
-
     # Get the modification time of the destination directory, ie:have we run today already or is this a snapshot?
     dst_dir_quarterly_options_stat = os.stat(dst_dir_quarterly_options)
     dst_dir_quarterly_options_mod_time = dst_dir_quarterly_options_stat.st_mtime
@@ -180,14 +173,20 @@ def main():
 
     # Move files to daily directory for quarterly data
     if datetime.datetime.fromtimestamp(dst_dir_quarterly_options_mod_time).date() != current_date:
+        # Delete old files from daily directory for quarterly data
+        delete_old_files(daily_dir_quarterly_options)
         move_files_to_daily_directory(dst_dir_quarterly_options, daily_dir_quarterly_options)
 
     # Move files to daily directory for weekly data
     if datetime.datetime.fromtimestamp(dst_dir_weekly_options_mod_time).date() != current_date:
+        # Delete old files from daily directory for weekly data
+        delete_old_files(daily_dir_weekly_options)
         move_files_to_daily_directory(dst_dir_weekly_options, daily_dir_weekly_options)
 
     # Move files to daily directory for skew data
     if datetime.datetime.fromtimestamp(dst_dir_skew_options_mod_time).date() != current_date:
+        # Delete old files from daily directory for weekly data
+        delete_old_files(daily_dir_skew_options)
         move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
 
     # Rename files in source directory for quarterly data
