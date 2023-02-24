@@ -148,7 +148,7 @@ def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthl
         print(f"MONTHLY CALL TOTALS: {int(option[2])}")
         print(f"T1 MONTHLY % DIFFERENCE: {round(float(option[4]), 2)}")
         print(f"T7 MONTHLY % DIFFERENCE: {round(float(option[6]), 2)}")
-    return sorted_options
+    return sorted_options[:10]
 
 march_call_table = get_options_table("MARCH", "C", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)
 march_put_table = get_options_table("MARCH", "P", MARCH_STRIKES_FILE, MARCH_LVT_WEEKLY_CSV_FILE, MARCH_LVT_MONTHLY_CSV_FILE, MARCH_LVT_WEEKLY_CSV_FILE_T1, MARCH_LVT_MONTHLY_CSV_FILE_T1, MARCH_LVT_WEEKLY_CSV_FILE_T7, MARCH_LVT_MONTHLY_CSV_FILE_T7)

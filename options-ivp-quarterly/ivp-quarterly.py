@@ -113,7 +113,7 @@ def march_call_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY CALL TOTALS: {int(option[6])}")
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return march_sorted_options
+    return march_sorted_options[:5]
 
 def march_put_table():
     options = []
@@ -158,7 +158,7 @@ def march_put_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY PUT TOTALS: {int(option[6])}")
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return march_sorted_options
+    return march_sorted_options[:5]
 
 def june_call_table():
     options = []
@@ -203,7 +203,7 @@ def june_call_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY CALL TOTALS: {int(option[6])}")
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return june_sorted_options
+    return june_sorted_options[:5]
 
 def june_put_table():
     options = []
@@ -248,7 +248,7 @@ def june_put_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY PUT TOTALS: {int(option[6])}")
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return june_sorted_options
+    return june_sorted_options[:5]
 
 def september_call_table():
     options = []
@@ -292,7 +292,7 @@ def september_call_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY CALL TOTALS: {int(option[6])}")
         print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return september_sorted_options
+    return september_sorted_options[:5]
 
 def september_put_table():
     options = []
@@ -336,9 +336,9 @@ def september_put_table():
             print(f"VOL: {int(option[5])}")
         print(f"WEEKLY PUT TOTALS: {int(option[6])}")
         print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return september_sorted_options
+    return september_sorted_options[:5]
 
-@app.route('/iv-per-expiry-quarterly')
+@app.route('/ivp-quarterly')
 def push_web():
     march_call = march_call_table()
     march_put = march_put_table()

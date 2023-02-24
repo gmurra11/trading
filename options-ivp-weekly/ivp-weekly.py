@@ -386,7 +386,7 @@ def third_friday_put_table():
             print(f"MONTHLY PUT TOTALS: {int(option[7])}")
     return third_friday_sorted_options
 
-@app.route('/iv-per-expiry-weekly')
+@app.route('/ivp-weekly')
 def push_web():
     next_friday_call = next_friday_call_table()
     next_friday_put = next_friday_put_table()

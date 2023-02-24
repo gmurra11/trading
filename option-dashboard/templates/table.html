@@ -1,6 +1,15 @@
 <div class="table-container">
   <div class="table-wrapper">
       <h2>ETH Delta 25 Skew</h2>
+      <p>
+      The 25 delta (25∆) skew measures the price of a call option with a delta of 0.25 and the price of a put option that has a delta of 0.25.
+      <b>If the skew increases then puts are becoming more expensive than calls</b>; if the skew decreases, call premiums are going up against puts premiums.
+      A negative value indicates puts are coming more expensive.
+      </p>
+      <p>
+      Note: T1, T7 and T30 values are based off an average over 1 day, 7 days and 30 days respectively and <b>then compared with current 1D average</b>.  T1 is yesterday's 1D file.
+      T7 and T30 have no previous file, rather just an average over 7 / 30 days etc...
+      </p>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Current 25 Delta Skew</th>
@@ -8,6 +17,8 @@
           <th style="padding: 8px;">T1 % Change</th>
           <th style="padding: 8px;">T7 25 Delta Skew</th>
           <th style="padding: 8px;">T7 % Change</th>
+          <th style="padding: 8px;">T30 25 Delta Skew</th>
+          <th style="padding: 8px;">T30 % Change</th>
         </tr>
         <tr style="background-color: lightgreen;">
           <td style="padding: 8px;background-color: lightgreen;">{{ data_avg_skew }}</td>
@@ -15,6 +26,8 @@
           <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t1 }}</td>
           <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_t7 }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t7 }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_t30 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t30 }}</td>
         </tr>
       </table>
     </div>
@@ -22,6 +35,12 @@
 <div class="table-container">
   <div class="table-wrapper">
       <h2>ETH Delta 25 IV Changes</h2>
+      <p>
+      <b>ETH Time Lapse Skew from Laevitas</b>.  Selecting Delta and not strike and only delta 25, it compares Today's, Yesterday's, 1 Week ago's and 1 Month's ago IV levels.
+      </p>
+      <p>
+      <b>Are vol levels increasing or decreasing?  Over a day / week / month?</b>
+      </p>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Current 25 Delta IV</th>
@@ -47,6 +66,12 @@
 <div class="table-container">
   <div class="table-wrapper">
       <h2>BTC Delta 25 IV Changes</h2>
+      <p>
+      <b>ETH Time Lapse Skew from Laevitas</b>.  Same as ETH above but for BTC.
+      </p>
+      <p>
+      <b>Are vol levels increasing or decreasing?  Over a day / week / month?</b>
+      </p>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">Current 25 Delta IV</th>

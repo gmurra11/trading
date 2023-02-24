@@ -9,14 +9,13 @@ DIR = "/home/gmurray/REPO/trading/data-skew"
 # T-1
 T1 = "/home/gmurray/REPO/trading/data-skew/daily"
 # T-7
-T7 = "/home/gmurray/REPO/trading/data-skew/weekly"
+#T7 = "/home/gmurray/REPO/trading/data-skew/weekly"
 
-SKEW25_CURRENT = f"{DIR}/LVT-SKEW25.csv"
-SKEW25_T1 = f"{T1}/LVT-SKEW25.csv"
-SKEW25_T7 = f"{T7}/LVT-SKEW25.csv"
+SKEW25_CURRENT = f"{DIR}/LVT-SKEW25-1D.csv"
+SKEW25_T1 = f"{T1}/LVT-SKEW25-1D.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
+SKEW25_T7 = f"{DIR}/LVT-SKEW25-1W.csv"
+SKEW25_T30 = f"{DIR}/LVT-SKEW25-1M.csv"
 
-# Data Directory
-DIR = "/home/gmurray/REPO/trading/data-skew"
 
 # In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
 ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
@@ -79,17 +78,21 @@ def get_skew_diff(avg_skew, skew_to_diff):
 avg_skew = get_average_skew(SKEW25_CURRENT)
 avg_skew_t1 = get_average_skew(SKEW25_T1)
 avg_skew_t7 = get_average_skew(SKEW25_T7)
+avg_skew_t30 = get_average_skew(SKEW25_T30)
 
 diff_t1 = get_skew_diff(avg_skew, avg_skew_t1)
 diff_t7 = get_skew_diff(avg_skew, avg_skew_t7)
+diff_t30 = get_skew_diff(avg_skew, avg_skew_t30)
 
 @app.route('/dashboard')
 def push_web():
     return render_template('table.html', data_avg_skew=avg_skew,
                                         data_avg_skew_t1=avg_skew_t1,
                                         data_avg_skew_t7=avg_skew_t7,
+                                        data_avg_skew_t30=avg_skew_t30,
                                         data_diff_t1=diff_t1,
                                         data_diff_t7=diff_t7,
+                                        data_diff_t30=diff_t30,
                                         data_eth_iv_today=eth_iv_change_delta25_list[0],
                                         data_eth_iv_yesterday=eth_iv_change_delta25_list[1],
                                         data_eth_iv_yesterday_chg=eth_iv_change_delta25_list[4],

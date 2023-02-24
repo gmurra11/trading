@@ -75,13 +75,13 @@ def main():
     weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/weekly"
 
     # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
-    next_fri = "24FEB23"
-    following_fri = "3MAR23"
-    third_fri = "10MAR23"
+    next_fri = "3MAR23"
+    following_fri = "10MAR23"
+    third_fri = "17MAR23"
 
-    previous_next_fri = "31MAR23"
-    previous_following_fri = "30JUN23"
-    previous_third_fri = "29SEP23"
+    previous_next_fri = "24FEB23"
+    previous_following_fri = "3MAR23"
+    previous_third_fri = "10MAR23"
 
     #  Update data files with the list of strike using above constants
     pattern = re.compile(r'ETH-{}-\d+'.format(previous_next_fri))
@@ -137,7 +137,9 @@ def main():
     }
 
     filename_map_skew = {
-        f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25.csv",
+        f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25-1D.csv",
+        f"lvt_chart Skew 25Δ ETH  (1).csv": f"LVT-SKEW25-1W.csv",
+        f"lvt_chart Skew 25Δ ETH  (2).csv": f"LVT-SKEW25-1M.csv",
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv"
     }
