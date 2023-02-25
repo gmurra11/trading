@@ -191,12 +191,18 @@ def main():
         delete_old_files(daily_dir_skew_options)
         move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
 
+    # Remove files from destination before coping from ~Download
+    delete_existing_files(dst_dir_quarterly_options filename_map_quarterly)
     # Rename files in source directory for quarterly data
     rename_files(src_dir, dst_dir_quarterly_options, filename_map_quarterly)
 
+    # Remove files from destination before coping from ~Download
+    delete_existing_files(dst_dir_weekly_options, filename_map_weekly)
     # Rename files in source directory for weekly data
     rename_files(src_dir, dst_dir_weekly_options, filename_map_weekly)
 
+    # Remove files from destination before coping from ~Download
+    delete_existing_files(dst_dir_skew_options, filename_map_skew)
     # Rename files in source directory for skew data
     rename_files(src_dir, dst_dir_skew_options, filename_map_skew)
 

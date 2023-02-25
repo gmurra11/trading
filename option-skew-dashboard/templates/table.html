@@ -94,6 +94,31 @@
       </table>
     </div>
 </div>
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>ETH 25 Delta Multi Expiry Skew Comparison</h2>
+      <p>
+      <b>ETH Multi Expiry Skew from Laevitas</b>. Using a 25 Delta, a comaprison of IV across expiries along with % diff against Q1 for comparison.  A higher neagive values
+      indicates a higher IV further out.
+      </p>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">{{ data_q1_label }} 25 Delta IV</th>
+          <th style="padding: 8px;">{{ data_q2_label }} 25 Delta IV<</th>
+          <th style="padding: 8px;">% diff between Q1 vs Q2</th>
+          <th style="padding: 8px;">{{ data_q3_label }} 25 Delta IV<</th>
+          <th style="padding: 8px;">% diff between Q1 vs Q3</th>
+        </tr>
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_multi_expiry_q1_iv }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_multi_expiry_q2_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_q2_iv_diff }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_multi_expiry_q3_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_q3_iv_diff }}</td>
+        </tr>
+      </table>
+    </div>
+</div>
 
 <style>
 .table-container {

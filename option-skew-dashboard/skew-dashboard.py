@@ -15,7 +15,39 @@ SKEW25_CURRENT = f"{DIR}/LVT-SKEW25-1D.csv"
 SKEW25_T1 = f"{T1}/LVT-SKEW25-1D.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
 SKEW25_T7 = f"{DIR}/LVT-SKEW25-1W.csv"
 SKEW25_T30 = f"{DIR}/LVT-SKEW25-1M.csv"
+MULTI_EXPIRY_SKEW = f"{DIR}/MULTI-EXPIRY-SKEW.csv"
 
+# Quarterly Expiries
+Q1_EXPIRY = "31st March 2023"
+Q2_EXPIRY = "30th June 2023"
+Q3_EXPIRY = "29th September 2023"
+
+# ETH Delta 25 SKEW ##############################################
+
+def get_average_skew(CSV_FILE):
+    # Read the csv file into a pandas dataframe
+    df = pd.read_csv(CSV_FILE)
+    # Calculate the average of the "Skew 30 Days" column
+    avg_skew = df['Skew 30 Days'].mean()
+    return round(avg_skew, 1)
+
+def get_skew_diff(avg_skew, skew_to_diff):
+    current_skew = avg_skew
+    # Calculate the percentage difference between the current value and T-?
+    diff = (skew_to_diff - current_skew) / current_skew * 100
+    return round(diff, 1)
+    # Round the average skew value to one decimal place
+
+avg_skew = get_average_skew(SKEW25_CURRENT)
+avg_skew_t1 = get_average_skew(SKEW25_T1)
+avg_skew_t7 = get_average_skew(SKEW25_T7)
+avg_skew_t30 = get_average_skew(SKEW25_T30)
+
+diff_t1 = get_skew_diff(avg_skew, avg_skew_t1)
+diff_t7 = get_skew_diff(avg_skew, avg_skew_t7)
+diff_t30 = get_skew_diff(avg_skew, avg_skew_t30)
+
+# IV 25 DELTA CHANGES #####################################################################
 
 # In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
 ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
@@ -31,7 +63,7 @@ def get_data(file_path):
         # If the desired row is not found, return a default value
         return [0, 0, 0, 0]
 
-def add_percentages(data):
+def add_iv_percentages_diff(data):
     today = float(data[0])
     yesterday = float(data[1])
     one_week_ago = float(data[2])
@@ -42,11 +74,19 @@ def add_percentages(data):
     one_month_ago_percent = round((today - one_month_ago) / one_month_ago * 100, 1)
     return [yesterday_percent, one_week_ago_percent, one_month_ago_percent]
 
+def add_multi_expiry_percentages_diff(data):
+    q1_iv = float(data[0])
+    q2_iv = float(data[1])
+    q3_iv = float(data[2])
+    diff_with_q1_vs_q2 = round((q1_iv - q2_iv) / q2_iv * 100, 1)
+    diff_with_q1_vs_q3 = round((q1_iv - q3_iv) / q3_iv * 100, 1)
+    return [diff_with_q1_vs_q2, diff_with_q1_vs_q3]
+
 eth_get_delta25_row = get_data(ETH_IV_CHANGE_SKEW_CSV)
-eth_percentage_diff_changes = add_percentages(eth_get_delta25_row)
+eth_percentage_diff_changes = add_iv_percentages_diff(eth_get_delta25_row)
 
 btc_get_delta25_row = get_data(BTC_IV_CHANGE_SKEW_CSV)
-btc_percentage_diff_changes = add_percentages(btc_get_delta25_row)
+btc_percentage_diff_changes = add_iv_percentages_diff(btc_get_delta25_row)
 
 if eth_percentage_diff_changes:
     eth_iv_change_delta25_list = eth_get_delta25_row + eth_percentage_diff_changes
@@ -60,31 +100,15 @@ if btc_percentage_diff_changes:
 else:
     print("Desired row not found")
 
-def get_average_skew(CSV_FILE):
-    # Read the csv file into a pandas dataframe
-    df = pd.read_csv(CSV_FILE)
-    # Calculate the average of the "Skew 30 Days" column
-    avg_skew = df['Skew 30 Days'].mean()
-    return round(avg_skew, 1)
+##############################################################################################
 
-def get_skew_diff(avg_skew, skew_to_diff):
-    current_skew = avg_skew
-    # Calculate the percentage difference between the current value and T-?
-    diff = (skew_to_diff - current_skew) / current_skew * 100
-    return round(diff, 1)
+# MLTI-EXPIRY SKEW
 
-# Round the average skew value to one decimal place
-#avg_skew = round(avg_skew, 1)
-avg_skew = get_average_skew(SKEW25_CURRENT)
-avg_skew_t1 = get_average_skew(SKEW25_T1)
-avg_skew_t7 = get_average_skew(SKEW25_T7)
-avg_skew_t30 = get_average_skew(SKEW25_T30)
+eth_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW)
+eth_multi_expiry_percentage_diff_changes = add_multi_expiry_percentages_diff(eth_multi_expiry_delta25_row)
 
-diff_t1 = get_skew_diff(avg_skew, avg_skew_t1)
-diff_t7 = get_skew_diff(avg_skew, avg_skew_t7)
-diff_t30 = get_skew_diff(avg_skew, avg_skew_t30)
 
-@app.route('/dashboard')
+@app.route('/skew-dashboard')
 def push_web():
     return render_template('table.html', data_avg_skew=avg_skew,
                                         data_avg_skew_t1=avg_skew_t1,
@@ -106,7 +130,16 @@ def push_web():
                                         data_btc_iv_last_week=btc_iv_change_delta25_list[2],
                                         data_btc_iv_last_week_chg=btc_iv_change_delta25_list[5],
                                         data_btc_iv_last_month=btc_iv_change_delta25_list[3],
-                                        data_btc_iv_last_month_chg=btc_iv_change_delta25_list[6])
+                                        data_btc_iv_last_month_chg=btc_iv_change_delta25_list[6],
+                                        data_multi_expiry_q1_iv=eth_multi_expiry_delta25_row[0],
+                                        data_multi_expiry_q2_iv=eth_multi_expiry_delta25_row[1],
+                                        data_multi_expiry_q3_iv=eth_multi_expiry_delta25_row[2],
+                                        data_multi_expiry_q2_iv_diff=eth_multi_expiry_percentage_diff_changes[0],
+                                        data_multi_expiry_q3_iv_diff=eth_multi_expiry_percentage_diff_changes[1],
+                                        data_q1_label=Q1_EXPIRY,
+                                        data_q2_label=Q2_EXPIRY,
+                                        data_q3_label=Q3_EXPIRY
+                                        )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5005)

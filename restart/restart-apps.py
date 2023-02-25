@@ -6,7 +6,7 @@ options_ivp_weekly_script = "options-ivp-weekly/ivp-weekly.py"
 options_ivp_quarterly_script = "options-ivp-quarterly/ivp-quarterly.py"
 blocked_otc_weekly_script = "blocked-otc-weekly/blockedTradesWeeklyOptions.py"
 blocked_otc_quarterly_script = "blocked-otc-quarterly/blockedTradesQuarterlyOptions.py"
-dashboard_script = "option-dashboard/dashboard.py"
+dashboard_script = "option-skew-dashboard/skew-dashboard.py"
 
 # Create a list of the scripts
 scripts = [options_ivp_weekly_script, options_ivp_quarterly_script, blocked_otc_weekly_script, blocked_otc_quarterly_script, dashboard_script]
