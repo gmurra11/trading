@@ -18,9 +18,9 @@ SKEW25_T30 = f"{DIR}/LVT-SKEW25-1M.csv"
 MULTI_EXPIRY_SKEW = f"{DIR}/MULTI-EXPIRY-SKEW.csv"
 
 # Quarterly Expiries
-Q1_EXPIRY = "31st March 2023"
-Q2_EXPIRY = "30th June 2023"
-Q3_EXPIRY = "29th September 2023"
+Q1_EXPIRY = "31st March"
+Q2_EXPIRY = "30th June"
+Q3_EXPIRY = "29th September"
 
 # ETH Delta 25 SKEW ##############################################
 

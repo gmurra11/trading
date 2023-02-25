@@ -141,7 +141,8 @@ def main():
         f"lvt_chart Skew 25Δ ETH  (1).csv": f"LVT-SKEW25-1W.csv",
         f"lvt_chart Skew 25Δ ETH  (2).csv": f"LVT-SKEW25-1M.csv",
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
-        f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv"
+        f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv",
+        f"lvt_chart Multi-Expiry Skew ETH .csv": f"MULTI-EXPIRY-SKEW.csv"
     }
 
     # WEEKLY DIRECTROY CLEAN UP
