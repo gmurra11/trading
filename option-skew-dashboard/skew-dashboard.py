@@ -11,11 +11,19 @@ T1 = "/home/gmurray/REPO/trading/data-skew/daily"
 # T-7
 #T7 = "/home/gmurray/REPO/trading/data-skew/weekly"
 
-SKEW25_CURRENT = f"{DIR}/LVT-SKEW25-1D.csv"
-SKEW25_T1 = f"{T1}/LVT-SKEW25-1D.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
-SKEW25_T7 = f"{DIR}/LVT-SKEW25-1W.csv"
-SKEW25_T30 = f"{DIR}/LVT-SKEW25-1M.csv"
-MULTI_EXPIRY_SKEW = f"{DIR}/MULTI-EXPIRY-SKEW.csv"
+SKEW25_CURRENT_ETH = f"{DIR}/LVT-SKEW25-1D.csv"
+SKEW25_T1_ETH = f"{T1}/LVT-SKEW25-1D.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
+SKEW25_T7_ETH = f"{DIR}/LVT-SKEW25-1W.csv"
+SKEW25_T30_ETH = f"{DIR}/LVT-SKEW25-1M.csv"
+SKEW25_CURRENT_BTC = f"{DIR}/LVT-SKEW25-1D.csv"
+SKEW25_T1_BTC = f"{T1}/LVT-SKEW25-1D-BTC.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
+SKEW25_T7_BTC = f"{DIR}/LVT-SKEW25-1W-BTC.csv"
+SKEW25_T30_BTC = f"{DIR}/LVT-SKEW25-1M-BTC.csv"
+MULTI_EXPIRY_SKEW_ETH = f"{DIR}/MULTI-EXPIRY-SKEW.csv"
+MULTI_EXPIRY_SKEW_BTC = f"{DIR}/MULTI-EXPIRY-SKEW-BTC.csv"
+# In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
+ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
+BTC_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-BTC-25DELTA-IV-CHANGE.csv"
 
 # Quarterly Expiries
 Q1_EXPIRY = "31st March"
@@ -38,20 +46,27 @@ def get_skew_diff(avg_skew, skew_to_diff):
     return round(diff, 1)
     # Round the average skew value to one decimal place
 
-avg_skew = get_average_skew(SKEW25_CURRENT)
-avg_skew_t1 = get_average_skew(SKEW25_T1)
-avg_skew_t7 = get_average_skew(SKEW25_T7)
-avg_skew_t30 = get_average_skew(SKEW25_T30)
+# ETH Values
+avg_skew_eth = get_average_skew(SKEW25_CURRENT_ETH)
+avg_skew_eth_t1 = get_average_skew(SKEW25_T1_ETH)
+avg_skew_eth_t7 = get_average_skew(SKEW25_T7_ETH)
+avg_skew_eth_t30 = get_average_skew(SKEW25_T30_ETH)
 
-diff_t1 = get_skew_diff(avg_skew, avg_skew_t1)
-diff_t7 = get_skew_diff(avg_skew, avg_skew_t7)
-diff_t30 = get_skew_diff(avg_skew, avg_skew_t30)
+diff_eth_t1 = get_skew_diff(avg_skew_eth, avg_skew_eth_t1)
+diff_eth_t7 = get_skew_diff(avg_skew_eth, avg_skew_eth_t7)
+diff_eth_t30 = get_skew_diff(avg_skew_eth, avg_skew_eth_t30)
+
+#  BTC Values
+avg_skew_btc = get_average_skew(SKEW25_CURRENT_BTC)
+avg_skew_btc_t1 = get_average_skew(SKEW25_T1_BTC)
+avg_skew_btc_t7 = get_average_skew(SKEW25_T7_BTC)
+avg_skew_btc_t30 = get_average_skew(SKEW25_T30_BTC)
+
+diff_btc_t1 = get_skew_diff(avg_skew_btc, avg_skew_btc_t1)
+diff_btc_t7 = get_skew_diff(avg_skew_btc, avg_skew_btc_t7)
+diff_btc_t30 = get_skew_diff(avg_skew_btc, avg_skew_btc_t30)
 
 # IV 25 DELTA CHANGES #####################################################################
-
-# In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
-ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
-BTC_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-BTC-25DELTA-IV-CHANGE.csv"
 
 def get_data(file_path):
     with open(file_path, 'r') as file:
@@ -104,19 +119,28 @@ else:
 
 # MLTI-EXPIRY SKEW
 
-eth_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW)
+eth_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW_ETH)
 eth_multi_expiry_percentage_diff_changes = add_multi_expiry_percentages_diff(eth_multi_expiry_delta25_row)
 
+btc_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW_BTC)
+btc_multi_expiry_percentage_diff_changes = add_multi_expiry_percentages_diff(btc_multi_expiry_delta25_row)
 
 @app.route('/skew-dashboard')
 def push_web():
-    return render_template('table.html', data_avg_skew=avg_skew,
-                                        data_avg_skew_t1=avg_skew_t1,
-                                        data_avg_skew_t7=avg_skew_t7,
-                                        data_avg_skew_t30=avg_skew_t30,
-                                        data_diff_t1=diff_t1,
-                                        data_diff_t7=diff_t7,
-                                        data_diff_t30=diff_t30,
+    return render_template('table.html', data_avg_skew_eth=avg_skew_eth,
+                                        data_avg_skew_eth_t1=avg_skew_eth_t1,
+                                        data_avg_skew_eth_t7=avg_skew_eth_t7,
+                                        data_avg_skew_eth_t30=avg_skew_eth_t30,
+                                        data_diff_eth_t1=diff_eth_t1,
+                                        data_diff_eth_t7=diff_eth_t7,
+                                        data_diff_eth_t30=diff_eth_t30,
+                                        data_avg_skew_btc=avg_skew_btc,
+                                        data_avg_skew_btc_t1=avg_skew_btc_t1,
+                                        data_avg_skew_btc_t7=avg_skew_btc_t7,
+                                        data_avg_skew_btc_t30=avg_skew_btc_t30,
+                                        data_diff_btc_t1=diff_btc_t1,
+                                        data_diff_btc_t7=diff_btc_t7,
+                                        data_diff_btc_t30=diff_btc_t30,
                                         data_eth_iv_today=eth_iv_change_delta25_list[0],
                                         data_eth_iv_yesterday=eth_iv_change_delta25_list[1],
                                         data_eth_iv_yesterday_chg=eth_iv_change_delta25_list[4],
@@ -131,11 +155,16 @@ def push_web():
                                         data_btc_iv_last_week_chg=btc_iv_change_delta25_list[5],
                                         data_btc_iv_last_month=btc_iv_change_delta25_list[3],
                                         data_btc_iv_last_month_chg=btc_iv_change_delta25_list[6],
-                                        data_multi_expiry_q1_iv=eth_multi_expiry_delta25_row[0],
-                                        data_multi_expiry_q2_iv=eth_multi_expiry_delta25_row[1],
-                                        data_multi_expiry_q3_iv=eth_multi_expiry_delta25_row[2],
-                                        data_multi_expiry_q2_iv_diff=eth_multi_expiry_percentage_diff_changes[0],
-                                        data_multi_expiry_q3_iv_diff=eth_multi_expiry_percentage_diff_changes[1],
+                                        data_multi_expiry_eth_q1_iv=eth_multi_expiry_delta25_row[0],
+                                        data_multi_expiry_eth_q2_iv=eth_multi_expiry_delta25_row[1],
+                                        data_multi_expiry_eth_q3_iv=eth_multi_expiry_delta25_row[2],
+                                        data_multi_expiry_eth_q2_iv_diff=eth_multi_expiry_percentage_diff_changes[0],
+                                        data_multi_expiry_eth_q3_iv_diff=eth_multi_expiry_percentage_diff_changes[1],
+                                        data_multi_expiry_btc_q1_iv=btc_multi_expiry_delta25_row[0],
+                                        data_multi_expiry_btc_q2_iv=btc_multi_expiry_delta25_row[1],
+                                        data_multi_expiry_btc_q3_iv=btc_multi_expiry_delta25_row[2],
+                                        data_multi_expiry_btc_q2_iv_diff=btc_multi_expiry_percentage_diff_changes[0],
+                                        data_multi_expiry_btc_q3_iv_diff=btc_multi_expiry_percentage_diff_changes[1],
                                         data_q1_label=Q1_EXPIRY,
                                         data_q2_label=Q2_EXPIRY,
                                         data_q3_label=Q3_EXPIRY

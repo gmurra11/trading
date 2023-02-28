@@ -21,4 +21,4 @@ for script in scripts:
     os.system(f"python3 {script_path} &")
 
 
-#ps command to view pids:  ps -ef | grep python3 | grep py | grep -v grep
+# ps command to view pids:  ps -ef | grep python3 | grep py | grep -v grep

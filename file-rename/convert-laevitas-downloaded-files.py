@@ -75,19 +75,17 @@ def main():
     weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/weekly"
 
     # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
-    next_fri = "3MAR23"
-    following_fri = "10MAR23"
-    third_fri = "17MAR23"
+    nearest_fri = "17MAR23"
+    following_fri = "28APR23"
 
-    previous_next_fri = "24FEB23"
-    previous_following_fri = "3MAR23"
-    previous_third_fri = "10MAR23"
+    previous_nearest_fri = "3MAR23"
+    previous_following_fri = "10MAR23"
 
     #  Update data files with the list of strike using above constants
-    pattern = re.compile(r'ETH-{}-\d+'.format(previous_next_fri))
-    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Next-Fri-Options.txt', inplace=True):
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_nearest_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Nearest-Fri-Options.txt', inplace=True):
         if pattern.search(line):
-            line = line.replace(previous_next_fri, next_fri)
+            line = line.replace(previous_nearest_fri, nearest_fri)
         print(line, end='')
 
     pattern = re.compile(r'ETH-{}-\d+'.format(previous_following_fri))
@@ -96,26 +94,19 @@ def main():
             line = line.replace(previous_following_fri, following_fri)
         print(line, end='')
 
-    pattern = re.compile(r'ETH-{}-\d+'.format(previous_third_fri))
-    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Third-Fri-Options.txt', inplace=True):
-        if pattern.search(line):
-            line = line.replace(previous_third_fri, third_fri)
-        print(line, end='')
-
     # Get the current date and time
     current_date = datetime.datetime.now().date()
     # Format the date to include a leading zero if the day is a single digit; this is a hack.  Strikes are a single digit, Laevitas files are two digits; eg: 3MAR or 03MAR
     formatted_date = current_date.strftime('%d%b%y') if current_date.day > 9 else current_date.strftime('0%d%b%y')
 
     # Parse the constants into datetime objects
-    next_fri_date = datetime.datetime.strptime(next_fri, '%d%b%y')
+    nearest_fri_date = datetime.datetime.strptime(nearest_fri, '%d%b%y')
     following_fri_date = datetime.datetime.strptime(following_fri, '%d%b%y')
-    third_fri_date = datetime.datetime.strptime(third_fri, '%d%b%y')
 
     # Format the parsed constants using the formatted date
-    next_fri_formatted = next_fri_date.strftime('%d%b%y').upper()
+    nearest_fri_formatted = nearest_fri_date.strftime('%d%b%y').upper()
     following_fri_formatted = following_fri_date.strftime('%d%b%y').upper()
-    third_fri_formatted = third_fri_date.strftime('%d%b%y').upper()
+
 
     # Mapping of old filenames to new filenames
     filename_map_quarterly = {
@@ -128,21 +119,23 @@ def main():
     }
 
     filename_map_weekly = {
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {next_fri_formatted} .csv": f"LVT-MONTHLY-{next_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  Month {nearest_fri_formatted} .csv": f"LVT-MONTHLY-{nearest_fri_formatted}.csv",
         f"lvt_chart ETH Buy_Sell Volume Last  Month {following_fri_formatted} .csv": f"LVT-MONTHLY-{following_fri_formatted}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  Month {third_fri_formatted} .csv": f"LVT-MONTHLY-{third_fri_formatted}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {next_fri_formatted} .csv": f"LVT-WEEKLY-{next_fri_formatted}.csv",
+        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {nearest_fri_formatted} .csv": f"LVT-WEEKLY-{nearest_fri_formatted}.csv",
         f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {following_fri_formatted} .csv": f"LVT-WEEKLY-{following_fri_formatted}.csv",
-        f"lvt_chart ETH Buy_Sell Volume Last  COMMON.Week {third_fri_formatted} .csv": f"LVT-WEEKLY-{third_fri_formatted}.csv"
     }
 
     filename_map_skew = {
         f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25-1D.csv",
         f"lvt_chart Skew 25Δ ETH  (1).csv": f"LVT-SKEW25-1W.csv",
         f"lvt_chart Skew 25Δ ETH  (2).csv": f"LVT-SKEW25-1M.csv",
+        f"lvt_chart Skew 25Δ BTC .csv": f"LVT-SKEW25-1D-BTC.csv",
+        f"lvt_chart Skew 25Δ BTC  (1).csv": f"LVT-SKEW25-1W-BTC.csv",
+        f"lvt_chart Skew 25Δ BTC  (2).csv": f"LVT-SKEW25-1M-BTC.csv",
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv",
-        f"lvt_chart Multi-Expiry Skew ETH .csv": f"MULTI-EXPIRY-SKEW.csv"
+        f"lvt_chart Multi-Expiry Skew ETH .csv": f"MULTI-EXPIRY-SKEW.csv",
+        f"lvt_chart Multi-Expiry Skew BTC .csv": f"MULTI-EXPIRY-SKEW-BTC.csv"
     }
 
     # WEEKLY DIRECTROY CLEAN UP
@@ -193,17 +186,17 @@ def main():
         move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
 
     # Remove files from destination before coping from ~Download
-    delete_existing_files(dst_dir_quarterly_options filename_map_quarterly)
+    #delete_existing_files(dst_dir_quarterly_options, filename_map_quarterly)
     # Rename files in source directory for quarterly data
     rename_files(src_dir, dst_dir_quarterly_options, filename_map_quarterly)
 
     # Remove files from destination before coping from ~Download
-    delete_existing_files(dst_dir_weekly_options, filename_map_weekly)
+    #delete_existing_files(dst_dir_weekly_options, filename_map_weekly)
     # Rename files in source directory for weekly data
     rename_files(src_dir, dst_dir_weekly_options, filename_map_weekly)
 
     # Remove files from destination before coping from ~Download
-    delete_existing_files(dst_dir_skew_options, filename_map_skew)
+    #delete_existing_files(dst_dir_skew_options, filename_map_skew)
     # Rename files in source directory for skew data
     rename_files(src_dir, dst_dir_skew_options, filename_map_skew)
 

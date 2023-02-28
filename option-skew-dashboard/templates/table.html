@@ -21,16 +21,49 @@
           <th style="padding: 8px;">T30 % Change</th>
         </tr>
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;background-color: lightgreen;">{{ data_avg_skew }}</td>
-          <td style="padding: 8px;background-color: pink;">{{ data_avg_skew_t1 }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t1 }}</td>
-          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_t7 }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t7 }}</td>
-          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_t30 }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_t30 }}</td>
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_avg_skew_eth }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_avg_skew_eth_t1 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_eth_t1 }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_eth_t7 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_eth_t7 }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_eth_t30 }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_eth_t30 }}</td>
         </tr>
       </table>
     </div>
+</div>
+<div class="table-wrapper">
+    <h2>BTC Delta 25 Skew</h2>
+    <p>
+    The 25 delta (25∆) skew measures the price of a call option with a delta of 0.25 and the price of a put option that has a delta of 0.25.
+    <b>If the skew increases then puts are becoming more expensive than calls</b>; if the skew decreases, call premiums are going up against puts premiums.
+    A negative value indicates puts are coming more expensive.
+    </p>
+    <p>
+    Note: T1, T7 and T30 values are based off an average over 1 day, 7 days and 30 days respectively and <b>then compared with current 1D average</b>.  T1 is yesterday's 1D file.
+    T7 and T30 have no previous file, rather just an average over 7 / 30 days etc...
+    </p>
+    <table border="1" style="border-collapse: collapse;">
+      <tr style="background-color: lightgray;">
+        <th style="padding: 8px;">Current (25 Delta Skew)</th>
+        <th style="padding: 8px;">T1 (25 Delta Skew)</th>
+        <th style="padding: 8px;">T1 % Change</th>
+        <th style="padding: 8px;">T7 (25 Delta Skew)</th>
+        <th style="padding: 8px;">T7 % Change</th>
+        <th style="padding: 8px;">T30 (25 Delta Skew)</th>
+        <th style="padding: 8px;">T30 % Change</th>
+      </tr>
+      <tr style="background-color: lightgreen;">
+        <td style="padding: 8px;background-color: lightgreen;">{{ data_avg_skew_btc }}</td>
+        <td style="padding: 8px;background-color: pink;">{{ data_avg_skew_btc_t1 }}</td>
+        <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_btc_t1 }}</td>
+        <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_btc_t7 }}</td>
+        <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_btc_t7 }}</td>
+        <td style="padding: 8px;background-color: lightblue;">{{ data_avg_skew_btc_t30 }}</td>
+        <td style="padding: 8px;background-color: ghostwhite;">{{ data_diff_btc_t30 }}</td>
+      </tr>
+    </table>
+  </div>
 </div>
 <div class="table-container">
   <div class="table-wrapper">
@@ -39,7 +72,7 @@
       <b>ETH Time Lapse Skew from Laevitas</b>.  Selecting Delta and not strike and only delta 25, it compares Today's, Yesterday's, 1 Week ago's and 1 Month's ago IV levels.
       </p>
       <p>
-      <b>Are vol levels increasing or decreasing?  Over a day / week / month?</b>
+      <b>Are vol levels increasing or decreasing?  Over a day / week / month?  NOTE this can be based off any expiry - depends what is downloaded.  I'm using APR 28th at the moment</b>
       </p>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
@@ -70,7 +103,7 @@
       <b>ETH Time Lapse Skew from Laevitas</b>.  Same as ETH above but for BTC.
       </p>
       <p>
-      <b>Are vol levels increasing or decreasing?  Over a day / week / month?</b>
+      <b>Are vol levels increasing or decreasing?  Over a day / week / month? NOTE this can be based off any expiry - depends what is downloaded.  I'm using APR 28th at the moment</b>
       </p>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
@@ -110,11 +143,37 @@
           <th style="padding: 8px;">% diff between Q1 vs Q3</th>
         </tr>
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;background-color: lightgreen;">{{ data_multi_expiry_q1_iv }}</td>
-          <td style="padding: 8px;background-color: pink;">{{ data_multi_expiry_q2_iv }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_q2_iv_diff }}</td>
-          <td style="padding: 8px;background-color: lightblue;">{{ data_multi_expiry_q3_iv }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_q3_iv_diff }}</td>
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_multi_expiry_eth_q1_iv }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_multi_expiry_eth_q2_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_eth_q2_iv_diff }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_multi_expiry_eth_q3_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_eth_q3_iv_diff }}</td>
+        </tr>
+      </table>
+    </div>
+</div>
+
+<div class="table-container">
+  <div class="table-wrapper">
+      <h2>BTC 25 Delta Multi Expiry Skew Comparison</h2>
+      <p>
+      <b>BTC Multi Expiry Skew from Laevitas</b>. Using a 25 Delta, a comaprison of IV across expiries along with % diff against Q1 for comparison.  A higher neagive values
+      indicates a higher IV further out.
+      </p>
+      <table border="1" style="border-collapse: collapse;">
+        <tr style="background-color: lightgray;">
+          <th style="padding: 8px;">{{ data_q1_label }} (25 Delta IV)</th>
+          <th style="padding: 8px;">{{ data_q2_label }} (25 Delta IV)</th>
+          <th style="padding: 8px;">% diff between Q1 vs Q2</th>
+          <th style="padding: 8px;">{{ data_q3_label }} (25 Delta IV)</th>
+          <th style="padding: 8px;">% diff between Q1 vs Q3</th>
+        </tr>
+        <tr style="background-color: lightgreen;">
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_multi_expiry_btc_q1_iv }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_multi_expiry_btc_q2_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_btc_q2_iv_diff }}</td>
+          <td style="padding: 8px;background-color: lightblue;">{{ data_multi_expiry_btc_q3_iv }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_multi_expiry_btc_q3_iv_diff }}</td>
         </tr>
       </table>
     </div>
