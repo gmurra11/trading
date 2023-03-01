@@ -1,3 +1,5 @@
+<!--
+
 <div class="table-container">
   <div class="table-wrapper">
       <h2>Nearest Friday's Call Options</h2>
@@ -30,7 +32,7 @@
     </div>
 
     <div class="table-wrapper">
-        <h2>nearest Friday's Put Options</h2>
+        <h2>Nearest Friday's Put Options</h2>
         <table border="1" style="border-collapse: collapse;">
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">#</th>
@@ -60,9 +62,11 @@
       </div>
 </div>
 
+-->
+
 <div class="table-container">
-  <div class="table-wrapper">
-    <h2>Following Friday's Call Options</h2>
+  <div class="table-wrapper call-wrapper">
+    <h3>Following Friday's Call Options</h3>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -91,8 +95,8 @@
     </table>
   </div>
 
-  <div class="table-wrapper">
-    <h2>Following Friday's Put Options</h2>
+  <div class="table-wrapper put-wrapper">
+    <h3>Following Friday's Put Options</h3>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
@@ -130,6 +134,21 @@
 .table-wrapper {
   margin-right: 10px;
   font-size: 12px;
+}
+
+.call-wrapper {
+  background-color: lightgreen;
+  border: 1px solid #ccc;
+}
+
+.put-wrapper {
+  background-color: lightpink;
+  border: 1px solid #ccc;
+}
+
+h3 {
+  text-align: center;
+  color: black
 }
 
 </style>

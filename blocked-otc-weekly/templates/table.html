@@ -1,3 +1,4 @@
+<!--
 <div class="table-container">
   <div class="table-wrapper">
       <h2>Next Friday Call Options</h2>
@@ -6,11 +7,11 @@
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_call_nearest_fri %}
         <tr style="background-color: lightgreen;">
@@ -46,11 +47,11 @@
             <th style="padding: 8px;">#</th>
             <th style="padding: 8px;">Instrument Name</th>
             <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-            <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-            <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+            <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+            <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
             <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-            <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-            <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+            <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+            <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
           </tr>
           {% for option in data_put_nearest_fri %}
           <tr style="background-color: lightpink;">
@@ -67,20 +68,21 @@
         </table>
       </div>
 </div>
+-->
 
 <div class="table-container">
-    <div class="table-wrapper">
-      <h2>Following Friday Q2 Call Options</h2>
+    <div class="table-wrapper call-wrapper">
+      <h3>Following Friday Q2 Call Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T1) MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T7) MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_call_following_friday %}
         <tr style="background-color: lightgreen;">
@@ -97,30 +99,27 @@
       </table>
     </div>
 
-    <div class="table-wrapper">
-        <h2>Following Friday Ratio</h2>
+    <div class="table-wrapper ratio">
+        <h4>P/C Ratio</h4>
         <table border="1" style="border-collapse: collapse;">
-          <tr style="background-color: lightgray;">
-            <th style="padding: 8px;">Put / Call Ratio</th>
-          </tr>
-          <tr style="background-color: whitesmoke;">
-            <td style="padding: 8px;font-weight: bold;">{{ data_following_friday_pc_ratio|round(2) }}</td>
+          <tr>
+            <td style="padding: 8px;font-weight: bold;font-size:24px;background-color: lightyellow;">{{ data_following_friday_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
 
-    <div class="table-wrapper">
-      <h2>Following Friday Q2 Put Options</h2>
+    <div class="table-wrapper put-wrapper">
+      <h3>Following Friday Q2 Put Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T1) MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">(T7) MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_put_following_friday %}
         <tr style="background-color: lightpink;">
@@ -158,6 +157,31 @@ td {
 h {
   padding: 14px;
   text-align: center;
+}
+
+.call-wrapper {
+  background-color: lightgreen;
+  border: 1px solid #ccc;
+}
+
+.put-wrapper {
+  background-color: lightpink;
+  border: 1px solid #ccc;
+}
+
+.ratio {
+  background-color: ghostwhite;
+  border: 1px solid #ccc;
+}
+
+h3 {
+  text-align: center;
+  color: black
+}
+
+h4 {
+  text-align: center;
+  color: black
 }
 
 </style>

@@ -1,6 +1,6 @@
 <div class="table-container">
-  <div class="table-wrapper">
-      <h2>March Q1 Call Options</h2>
+  <div class="table-wrapper call-wrapper">
+      <h3>March Q1 Call Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
@@ -27,20 +27,17 @@
       </table>
     </div>
 
-    <div class="table-wrapper">
-        <h2>March Ratio</h2>
+    <div class="table-wrapper ratio">
+        <h4>P/C Ratio</h4>
         <table border="1" style="border-collapse: collapse;">
-          <tr style="background-color: lightgray;">
-            <th style="padding: 8px;">Put / Call Ratio</th>
-          </tr>
           <tr style="background-color: whitesmoke;">
-            <td style="padding: 8px;font-weight: bold;">{{ data_march_pc_ratio|round(2) }}</td>
+            <td style="padding: 8px;font-weight: bold;font-size:24px;background-color: lightyellow;">{{ data_march_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
 
-    <div class="table-wrapper">
-        <h2>March Q1 Put Options</h2>
+    <div class="table-wrapper put-wrapper">
+        <h3>March Q1 Put Options</h3>
         <table border="1" style="border-collapse: collapse;">
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">#</th>
@@ -68,19 +65,21 @@
       </div>
 </div>
 
+</br>
+
 <div class="table-container">
-    <div class="table-wrapper">
-      <h2>June Q2 Call Options</h2>
+    <div class="table-wrapper call-wrapper">
+      <h3>June Q2 Call Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_call_june %}
         <tr style="background-color: lightgreen;">
@@ -97,30 +96,27 @@
       </table>
     </div>
 
-    <div class="table-wrapper">
-        <h2>June Ratio</h2>
+    <div class="table-wrapper ratio">
+        <h4>P/C Ratio</h4>
         <table border="1" style="border-collapse: collapse;">
-          <tr style="background-color: lightgray;">
-            <th style="padding: 8px;">Put / Call Ratio</th>
-          </tr>
           <tr style="background-color: whitesmoke;">
-            <td style="padding: 8px;font-weight: bold;">{{ data_june_pc_ratio|round(2) }}</td>
+            <td style="padding: 8px;font-weight: bold;font-size:24px;background-color: lightyellow;">{{ data_june_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
 
-    <div class="table-wrapper">
-      <h2>June Q2 Put Options</h2>
+    <div class="table-wrapper put-wrapper">
+      <h3>June Q2 Put Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_put_june %}
         <tr style="background-color: lightpink;">
@@ -138,19 +134,21 @@
     </div>
   </div>
 
+</br>
+
 <div class="table-container">
-    <div class="table-wrapper">
-      <h2>September Q3 Call Options</h2>
+    <div class="table-wrapper call-wrapper">
+      <h3>September Q3 Call Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_call_sep %}
         <tr style="background-color: lightgreen;">
@@ -167,30 +165,27 @@
       </table>
     </div>
 
-    <div class="table-wrapper">
-        <h2>September Ratio</h2>
+    <div class="table-wrapper ratio">
+        <h4>P/C Ratio</h4>
         <table border="1" style="border-collapse: collapse;">
-          <tr style="background-color: lightgray;">
-            <th style="padding: 8px;">Put / Call Ratio</th>
-          </tr>
           <tr style="background-color: whitesmoke;">
-            <td style="padding: 8px;font-weight: bold;">{{ data_sep_pc_ratio|round(2) }}</td>
+            <td style="padding: 8px;font-weight: bold;font-size:24px;background-color: lightyellow;">{{ data_sep_pc_ratio|round(2) }}</td>
           </tr>
         </table>
     </div>
 
-    <div class="table-wrapper">
-      <h2>September Q3 Put Options</h2>
+    <div class="table-wrapper put-wrapper">
+      <h3>September Q3 Put Options</h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
           <th style="padding: 8px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> WEEKLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 WEEKLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">MONTHLY BLOCK LIQUIDITY</th>
-          <th style="padding: 8px;">T1 --> MONTHLY DIFFERENCE</th>
-          <th style="padding: 8px;">T7 --> MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T1 MONTHLY DIFFERENCE</th>
+          <th style="padding: 8px;">T7 MONTHLY DIFFERENCE</th>
         </tr>
         {% for option in data_put_sep %}
         <tr style="background-color: lightpink;">
@@ -228,6 +223,31 @@ td {
 h {
   padding: 14px;
   text-align: center;
+}
+
+.call-wrapper {
+  background-color: lightgreen;
+  border: 1px solid #ccc;
+}
+
+.put-wrapper {
+  background-color: lightpink;
+  border: 1px solid #ccc;
+}
+
+.ratio {
+  background-color: ghostwhite;
+  border: 1px solid #ccc;
+}
+
+h3 {
+  text-align: center;
+  color: black
+}
+
+h4 {
+  text-align: center;
+  color: black
 }
 
 </style>

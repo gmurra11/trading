@@ -124,7 +124,7 @@ def nearest_friday_call_table():
             print(f"VOL: None")
         else:
             print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return nearest_friday_sorted_options[:10]
+    return nearest_friday_sorted_options[:15]
 
 def nearest_friday_put_table():
     options = []
@@ -175,7 +175,7 @@ def nearest_friday_put_table():
             print(f"VOL: None")
         else:
             print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return nearest_friday_sorted_options[:10]
+    return nearest_friday_sorted_options[:15]
 
 def following_friday_call_table():
     options = []
@@ -229,7 +229,7 @@ def following_friday_call_table():
             print(f"VOL: None")
         else:
             print(f"MONTHLY CALL TOTALS: {int(option[7])}")
-    return following_friday_sorted_options[:10]
+    return following_friday_sorted_options[:15]
 
 def following_friday_put_table():
     options = []
@@ -280,7 +280,7 @@ def following_friday_put_table():
             print(f"VOL: None")
         else:
             print(f"MONTHLY PUT TOTALS: {int(option[7])}")
-    return following_friday_sorted_options[:10]
+    return following_friday_sorted_options[:15]
 
 @app.route('/ivp-weekly')
 def push_web():
