@@ -30,6 +30,18 @@ Q1_EXPIRY = "31st March"
 Q2_EXPIRY = "30th June"
 Q3_EXPIRY = "29th September"
 
+#################### Shared function ###########################
+
+def get_diff(current, new_value):
+    current_value = current
+    diff = current_value - new_value
+    if diff > 0:
+        return '+' + str(round(diff, 2))
+    elif diff < 0:
+        return str(round(diff, 2))
+    else:
+        return '0'
+
 # ETH Delta 25 SKEW ##############################################
 
 def get_average_skew(CSV_FILE):
@@ -39,22 +51,15 @@ def get_average_skew(CSV_FILE):
     avg_skew = df['Skew 30 Days'].mean()
     return round(avg_skew, 1)
 
-def get_skew_diff(avg_skew, skew_to_diff):
-    current_skew = avg_skew
-    # Calculate the percentage difference between the current value and T-?
-    diff = (skew_to_diff - current_skew) / current_skew * 100
-    return round(diff, 1)
-    # Round the average skew value to one decimal place
-
 # ETH Values
 avg_skew_eth = get_average_skew(SKEW25_CURRENT_ETH)
 avg_skew_eth_t1 = get_average_skew(SKEW25_T1_ETH)
 avg_skew_eth_t7 = get_average_skew(SKEW25_T7_ETH)
 avg_skew_eth_t30 = get_average_skew(SKEW25_T30_ETH)
 
-diff_eth_t1 = get_skew_diff(avg_skew_eth, avg_skew_eth_t1)
-diff_eth_t7 = get_skew_diff(avg_skew_eth, avg_skew_eth_t7)
-diff_eth_t30 = get_skew_diff(avg_skew_eth, avg_skew_eth_t30)
+diff_eth_t1 = get_diff(avg_skew_eth, avg_skew_eth_t1)
+diff_eth_t7 = get_diff(avg_skew_eth, avg_skew_eth_t7)
+diff_eth_t30 = get_diff(avg_skew_eth, avg_skew_eth_t30)
 
 #  BTC Values
 avg_skew_btc = get_average_skew(SKEW25_CURRENT_BTC)
@@ -62,9 +67,9 @@ avg_skew_btc_t1 = get_average_skew(SKEW25_T1_BTC)
 avg_skew_btc_t7 = get_average_skew(SKEW25_T7_BTC)
 avg_skew_btc_t30 = get_average_skew(SKEW25_T30_BTC)
 
-diff_btc_t1 = get_skew_diff(avg_skew_btc, avg_skew_btc_t1)
-diff_btc_t7 = get_skew_diff(avg_skew_btc, avg_skew_btc_t7)
-diff_btc_t30 = get_skew_diff(avg_skew_btc, avg_skew_btc_t30)
+diff_btc_t1 = get_diff(avg_skew_btc, avg_skew_btc_t1)
+diff_btc_t7 = get_diff(avg_skew_btc, avg_skew_btc_t7)
+diff_btc_t30 = get_diff(avg_skew_btc, avg_skew_btc_t30)
 
 # IV 25 DELTA CHANGES #####################################################################
 
@@ -78,39 +83,31 @@ def get_data(file_path):
         # If the desired row is not found, return a default value
         return [0, 0, 0, 0]
 
-def add_iv_percentages_diff(data):
+def add_25delta_iv_diff(data):
     today = float(data[0])
     yesterday = float(data[1])
     one_week_ago = float(data[2])
     one_month_ago = float(data[3])
     today_percent = 0
-    yesterday_percent = round((today - yesterday) / yesterday * 100, 1)
-    one_week_ago_percent = round((today - one_week_ago) / one_week_ago * 100, 1)
-    one_month_ago_percent = round((today - one_month_ago) / one_month_ago * 100, 1)
+    yesterday_percent = get_diff(today, yesterday)
+    one_week_ago_percent = get_diff(today, one_week_ago)
+    one_month_ago_percent = get_diff(today, one_month_ago)
     return [yesterday_percent, one_week_ago_percent, one_month_ago_percent]
 
-def add_multi_expiry_percentages_diff(data):
-    q1_iv = float(data[0])
-    q2_iv = float(data[1])
-    q3_iv = float(data[2])
-    diff_with_q1_vs_q2 = round((q1_iv - q2_iv) / q2_iv * 100, 1)
-    diff_with_q1_vs_q3 = round((q1_iv - q3_iv) / q3_iv * 100, 1)
-    return [diff_with_q1_vs_q2, diff_with_q1_vs_q3]
-
 eth_get_delta25_row = get_data(ETH_IV_CHANGE_SKEW_CSV)
-eth_percentage_diff_changes = add_iv_percentages_diff(eth_get_delta25_row)
+eth_diff_changes = add_25delta_iv_diff(eth_get_delta25_row)
 
 btc_get_delta25_row = get_data(BTC_IV_CHANGE_SKEW_CSV)
-btc_percentage_diff_changes = add_iv_percentages_diff(btc_get_delta25_row)
+btc_diff_changes = add_25delta_iv_diff(btc_get_delta25_row)
 
-if eth_percentage_diff_changes:
-    eth_iv_change_delta25_list = eth_get_delta25_row + eth_percentage_diff_changes
+if eth_diff_changes:
+    eth_iv_change_delta25_list = eth_get_delta25_row + eth_diff_changes
     print(eth_iv_change_delta25_list)
 else:
     print("Desired row not found")
 
-if btc_percentage_diff_changes:
-    btc_iv_change_delta25_list = btc_get_delta25_row + btc_percentage_diff_changes
+if btc_diff_changes:
+    btc_iv_change_delta25_list = btc_get_delta25_row + btc_diff_changes
     print(btc_iv_change_delta25_list)
 else:
     print("Desired row not found")
@@ -119,11 +116,21 @@ else:
 
 # MLTI-EXPIRY SKEW
 
+def add_multi_expiry_diff(data):
+    q1_iv = float(data[0])
+    q2_iv = float(data[1])
+    q3_iv = float(data[2])
+    diff_with_q1_vs_q2 = get_diff(q1_iv, q2_iv)
+    diff_with_q1_vs_q3 = get_diff(q1_iv, q3_iv)
+    return [diff_with_q1_vs_q2, diff_with_q1_vs_q3]
+
 eth_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW_ETH)
-eth_multi_expiry_percentage_diff_changes = add_multi_expiry_percentages_diff(eth_multi_expiry_delta25_row)
+eth_multi_expiry_diff_changes = add_multi_expiry_diff(eth_multi_expiry_delta25_row)
 
 btc_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW_BTC)
-btc_multi_expiry_percentage_diff_changes = add_multi_expiry_percentages_diff(btc_multi_expiry_delta25_row)
+btc_multi_expiry_diff_changes = add_multi_expiry_diff(btc_multi_expiry_delta25_row)
+
+############################ Pass to webpage ###################################################
 
 @app.route('/skew-dashboard')
 def push_web():
@@ -158,13 +165,13 @@ def push_web():
                                         data_multi_expiry_eth_q1_iv=eth_multi_expiry_delta25_row[0],
                                         data_multi_expiry_eth_q2_iv=eth_multi_expiry_delta25_row[1],
                                         data_multi_expiry_eth_q3_iv=eth_multi_expiry_delta25_row[2],
-                                        data_multi_expiry_eth_q2_iv_diff=eth_multi_expiry_percentage_diff_changes[0],
-                                        data_multi_expiry_eth_q3_iv_diff=eth_multi_expiry_percentage_diff_changes[1],
+                                        data_multi_expiry_eth_q2_iv_diff=eth_multi_expiry_diff_changes[0],
+                                        data_multi_expiry_eth_q3_iv_diff=eth_multi_expiry_diff_changes[1],
                                         data_multi_expiry_btc_q1_iv=btc_multi_expiry_delta25_row[0],
                                         data_multi_expiry_btc_q2_iv=btc_multi_expiry_delta25_row[1],
                                         data_multi_expiry_btc_q3_iv=btc_multi_expiry_delta25_row[2],
-                                        data_multi_expiry_btc_q2_iv_diff=btc_multi_expiry_percentage_diff_changes[0],
-                                        data_multi_expiry_btc_q3_iv_diff=btc_multi_expiry_percentage_diff_changes[1],
+                                        data_multi_expiry_btc_q2_iv_diff=btc_multi_expiry_diff_changes[0],
+                                        data_multi_expiry_btc_q3_iv_diff=btc_multi_expiry_diff_changes[1],
                                         data_q1_label=Q1_EXPIRY,
                                         data_q2_label=Q2_EXPIRY,
                                         data_q3_label=Q3_EXPIRY
