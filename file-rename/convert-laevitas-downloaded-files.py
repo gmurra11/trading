@@ -106,16 +106,16 @@ def main():
     }
 
     filename_map_skew = {
-        f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25-1D.csv",
-        f"lvt_chart Skew 25Δ ETH  (1).csv": f"LVT-SKEW25-1W.csv",
-        f"lvt_chart Skew 25Δ ETH  (2).csv": f"LVT-SKEW25-1M.csv",
+        f"lvt_chart Skew 25Δ ETH .csv": f"LVT-SKEW25-1D-ETH.csv",
+        f"lvt_chart Skew 25Δ ETH  (1).csv": f"LVT-SKEW25-1W-ETH.csv",
+        f"lvt_chart Skew 25Δ ETH  (2).csv": f"LVT-SKEW25-1M-ETH.csv",
         f"lvt_chart Skew 25Δ BTC .csv": f"LVT-SKEW25-1D-BTC.csv",
         f"lvt_chart Skew 25Δ BTC  (1).csv": f"LVT-SKEW25-1W-BTC.csv",
         f"lvt_chart Skew 25Δ BTC  (2).csv": f"LVT-SKEW25-1M-BTC.csv",
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv",
-        f"lvt_chart Multi-Expiry Skew ETH .csv": f"MULTI-EXPIRY-SKEW.csv",
-        f"lvt_chart Multi-Expiry Skew BTC .csv": f"MULTI-EXPIRY-SKEW-BTC.csv"
+        f"lvt_chart Multi-Expiry Skew ETH .csv": f"LVT-MULTI-EXPIRY-SKEW.csv",
+        f"lvt_chart Multi-Expiry Skew BTC .csv": f"LVT-MULTI-EXPIRY-SKEW-BTC.csv"
     }
 
     # WEEKLY DIRECTROY CLEAN UP

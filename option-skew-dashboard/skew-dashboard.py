@@ -12,15 +12,15 @@ T1 = "/home/gmurray/REPO/trading/data-skew/daily"
 #T7 = "/home/gmurray/REPO/trading/data-skew/weekly"
 
 SKEW25_CURRENT_ETH = f"{DIR}/LVT-SKEW25-1D.csv"
-SKEW25_T1_ETH = f"{T1}/LVT-SKEW25-1D.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
-SKEW25_T7_ETH = f"{DIR}/LVT-SKEW25-1W.csv"
-SKEW25_T30_ETH = f"{DIR}/LVT-SKEW25-1M.csv"
+SKEW25_T1_ETH = f"{T1}/LVT-SKEW25-1D-ETH.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
+SKEW25_T7_ETH = f"{DIR}/LVT-SKEW25-1W-ETH.csv"
+SKEW25_T30_ETH = f"{DIR}/LVT-SKEW25-1M-ETH.csv"
 SKEW25_CURRENT_BTC = f"{DIR}/LVT-SKEW25-1D-BTC.csv"
 SKEW25_T1_BTC = f"{T1}/LVT-SKEW25-1D-BTC.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
 SKEW25_T7_BTC = f"{DIR}/LVT-SKEW25-1W-BTC.csv"
 SKEW25_T30_BTC = f"{DIR}/LVT-SKEW25-1M-BTC.csv"
-MULTI_EXPIRY_SKEW_ETH = f"{DIR}/MULTI-EXPIRY-SKEW.csv"
-MULTI_EXPIRY_SKEW_BTC = f"{DIR}/MULTI-EXPIRY-SKEW-BTC.csv"
+MULTI_EXPIRY_SKEW_ETH = f"{DIR}/LVT-MULTI-EXPIRY-SKEW.csv"
+MULTI_EXPIRY_SKEW_BTC = f"{DIR}/LVT-MULTI-EXPIRY-SKEW-BTC.csv"
 # In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
 ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
 BTC_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-BTC-25DELTA-IV-CHANGE.csv"

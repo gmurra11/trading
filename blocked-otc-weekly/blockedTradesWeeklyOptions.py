@@ -50,6 +50,16 @@ config.read('/home/gmurray/REPO/trading/config.ini')
 client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']
 
+def get_diff(current, new_value):
+    current_value = current
+    diff = current_value - new_value
+    if diff > 0:
+        return '+' + str(round(diff, 2))
+    elif diff < 0:
+        return str(round(diff, 2))
+    else:
+        return '0'
+
 def put_call_ratio(calls, puts):
     pc_ratio = 0
 
@@ -127,10 +137,10 @@ def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthl
         #setting the current or live directory ./ files to 0 if a None value is found, otherwise it breaks the caulcation
         opt_1 = opt[1] if opt[1] else 0
         opt_2 = opt[2] if opt[2] else 0
-        weekly_diff_t1 = 0 if opt_t1[1] is None or opt_t1[1] == 0 else round((abs(opt_1 - opt_t1[1]) / opt_t1[1]) * 100, 2)
-        monthly_diff_t1 = 0 if opt_t1[2] is None or opt_t1[2] == 0 else round((abs(opt_2 - opt_t1[2]) / opt_t1[2]) * 100, 2)
-        weekly_diff_t7 = 0 if opt_t7[1] is None or opt_t7[1] == 0 else round((abs(opt_1 - opt_t7[1]) / opt_t7[1]) * 100, 2)
-        monthly_diff_t7 = 0 if opt_t7[2] is None or opt_t7[2] == 0 else round((abs(opt_2 - opt_t7[2]) / opt_t7[2]) * 100, 2)
+        weekly_diff_t1 = 0 if opt_t1[1] is None or opt_t1[1] == 0 else get_diff(opt_1, opt_t1[1])
+        monthly_diff_t1 = 0 if opt_t1[2] is None or opt_t1[2] == 0 else get_diff(opt_2, opt_t1[2])
+        weekly_diff_t7 = 0 if opt_t7[1] is None or opt_t7[1] == 0 else get_diff(opt_1, opt_t7[1])
+        monthly_diff_t7 = 0 if opt_t7[2] is None or opt_t7[2] == 0 else get_diff(opt_2, opt_t7[2])
         options_diff.append((opt[0], opt_1, opt_2, weekly_diff_t1, monthly_diff_t1, weekly_diff_t7, monthly_diff_t7))
 
     sorted_options = sorted(options_diff, key=lambda x: (x[2], x[1]), reverse=True)
@@ -138,11 +148,11 @@ def get_options_table(expiry, option_type, strikes_file, weekly_csv_file, monthl
     for option in sorted_options:
         print(f"Instrument Name: {option[0]}")
         print(f"WEEKLY CALL TOTALS: {int(option[1])}")
-        print(f"T1 WEEKLY % DIFFERENCE: {round(float(option[3]), 2)}")
-        print(f"T7 WEEKLY % DIFFERENCE: {round(float(option[5]), 2)}")
+        print(f"T1 WEEKLY DIFFERENCE: {round(float(option[3]), 2)}")
+        print(f"T7 WEEKLY DIFFERENCE: {round(float(option[5]), 2)}")
         print(f"MONTHLY CALL TOTALS: {int(option[2])}")
-        print(f"T1 MONTHLY % DIFFERENCE: {round(float(option[4]), 2)}")
-        print(f"T7 MONTHLY % DIFFERENCE: {round(float(option[6]), 2)}")
+        print(f"T1 MONTHLY DIFFERENCE: {round(float(option[4]), 2)}")
+        print(f"T7 MONTHLY DIFFERENCE: {round(float(option[6]), 2)}")
     return sorted_options[:10]
 
 nearest_fri_call_table = get_options_table("NEAREST_FRI", "C", NEAREST_FRI_STRIKES_FILE, NEAREST_FRI_LVT_WEEKLY_CSV_FILE, NEAREST_FRI_LVT_MONTHLY_CSV_FILE, NEAREST_FRI_LVT_WEEKLY_CSV_FILE_T1, NEAREST_FRI_LVT_MONTHLY_CSV_FILE_T1, NEAREST_FRI_LVT_WEEKLY_CSV_FILE_T7, NEAREST_FRI_LVT_MONTHLY_CSV_FILE_T7)
