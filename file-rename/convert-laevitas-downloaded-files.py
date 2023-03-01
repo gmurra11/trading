@@ -74,26 +74,6 @@ def main():
     # Weekly output directory for skew data
     weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/weekly"
 
-    # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
-    nearest_fri = "17MAR23"
-    following_fri = "28APR23"
-
-    previous_nearest_fri = "3MAR23"
-    previous_following_fri = "10MAR23"
-
-    #  Update data files with the list of strike using above constants
-    pattern = re.compile(r'ETH-{}-\d+'.format(previous_nearest_fri))
-    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Nearest-Fri-Options.txt', inplace=True):
-        if pattern.search(line):
-            line = line.replace(previous_nearest_fri, nearest_fri)
-        print(line, end='')
-
-    pattern = re.compile(r'ETH-{}-\d+'.format(previous_following_fri))
-    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Following-Fri-Options.txt', inplace=True):
-        if pattern.search(line):
-            line = line.replace(previous_following_fri, following_fri)
-        print(line, end='')
-
     # Get the current date and time
     current_date = datetime.datetime.now().date()
     # Format the date to include a leading zero if the day is a single digit; this is a hack.  Strikes are a single digit, Laevitas files are two digits; eg: 3MAR or 03MAR
@@ -184,6 +164,26 @@ def main():
         # Delete old files from daily directory for weekly data
         delete_old_files(daily_dir_skew_options)
         move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
+
+    # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
+    nearest_fri = "17MAR23"
+    following_fri = "28APR23"
+
+    previous_nearest_fri = "3MAR23"
+    previous_following_fri = "10MAR23"
+
+    #  Update data files with the list of strike using above constants
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_nearest_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Nearest-Fri-Options.txt', inplace=True):
+        if pattern.search(line):
+            line = line.replace(previous_nearest_fri, nearest_fri)
+        print(line, end='')
+
+    pattern = re.compile(r'ETH-{}-\d+'.format(previous_following_fri))
+    for line in fileinput.input('/home/gmurray/REPO/trading/data-weekly/Following-Fri-Options.txt', inplace=True):
+        if pattern.search(line):
+            line = line.replace(previous_following_fri, following_fri)
+        print(line, end='')
 
     # Remove files from destination before coping from ~Download
     #delete_existing_files(dst_dir_quarterly_options, filename_map_quarterly)
