@@ -1,5 +1,7 @@
 import os
 
+# ps command to view pids:  ps -ef | grep python3 | grep py | grep -v grep
+
 base_dir = "/home/gmurray/REPO/trading/"
 
 options_ivp_weekly_script = "options-ivp-weekly/ivp-weekly.py"
@@ -19,6 +21,3 @@ for script in scripts:
     os.system(f"pkill -f {script_path}")
     # Start the script
     os.system(f"python3 {script_path} &")
-
-
-## ps command to view pids:  ps -ef | grep python3 | grep py | grep -v grep

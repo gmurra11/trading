@@ -4,6 +4,13 @@ import shutil
 import fileinput
 import re
 
+# Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
+nearest_fri = "17MAR23"
+following_fri = "28APR23"
+
+previous_nearest_fri = "3MAR23"
+previous_following_fri = "10MAR23"
+
 def delete_old_files(directory):
     current_date = datetime.datetime.now().date()
 
@@ -164,13 +171,6 @@ def main():
         # Delete old files from daily directory for weekly data
         delete_old_files(daily_dir_skew_options)
         move_files_to_daily_directory(dst_dir_skew_options, daily_dir_skew_options)
-
-    # Only Change these Constants when the weekly options change.  Hopefully initially small maintenance.
-    nearest_fri = "17MAR23"
-    following_fri = "28APR23"
-
-    previous_nearest_fri = "3MAR23"
-    previous_following_fri = "10MAR23"
 
     #  Update data files with the list of strike using above constants
     pattern = re.compile(r'ETH-{}-\d+'.format(previous_nearest_fri))

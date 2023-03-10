@@ -11,7 +11,7 @@ T1 = "/home/gmurray/REPO/trading/data-skew/daily"
 # T-7
 #T7 = "/home/gmurray/REPO/trading/data-skew/weekly"
 
-SKEW25_CURRENT_ETH = f"{DIR}/LVT-SKEW25-1D.csv"
+SKEW25_CURRENT_ETH = f"{DIR}/LVT-SKEW25-1D-ETH.csv"
 SKEW25_T1_ETH = f"{T1}/LVT-SKEW25-1D-ETH.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
 SKEW25_T7_ETH = f"{DIR}/LVT-SKEW25-1W-ETH.csv"
 SKEW25_T30_ETH = f"{DIR}/LVT-SKEW25-1M-ETH.csv"
