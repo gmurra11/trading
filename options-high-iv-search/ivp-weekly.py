@@ -91,6 +91,8 @@ def nearest_friday_call_table():
                 ivp = calculate_ivp(mark_iv)
                 oi = iv_details['result']['open_interest']
                 vol = iv_details['result']['stats']['volume']
+                #range
+                #delta
                 options.append((instrument_name, mark_iv, ivr, ivp, oi, vol))
 
     nearest_friday_sorted_options = sorted(options, key=lambda x: (x[3], x[2]))

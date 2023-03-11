@@ -11,8 +11,14 @@ btc_get_index_response = requests.get(btc_get_index_endpoint)
 eth_get_index_response = requests.get(eth_get_index_endpoint)
 
 # Get the BTC and ETH index prices from the responses
-btc_index_price = btc_get_index_response.json()["result"]
-eth_index_price = eth_get_index_response.json()["result"]
+btc_index_price = btc_get_index_response.json()["result"]['BTC']
+eth_index_price = eth_get_index_response.json()["result"]['ETH']
+
+def calculate_range(price, mark_iv):
+    range_pct = mark_iv / 100
+    min_range = price - (price * range_pct)
+    max_range = price + (price * range_pct)
+    return min_range, max_range
 
 # Set the API endpoint and parameters for BTC options
 btc_endpoint = "https://www.deribit.com/api/v2/public/get_instruments"
@@ -57,6 +63,10 @@ for exp in expiries:
     if "result" in order_book and order_book['result'] and order_book['result']['open_interest']:
         delta = order_book['result']['greeks']['delta']
         if 0.15 < abs(delta) < 0.30:
+            #print(exp["base_currency"])
+            index_price = btc_index_price if exp["base_currency"] == "BTC" else eth_index_price
+            #print(index_price)
+            range_min, range_max = calculate_range(index_price, order_book['result']['mark_iv'])
             filtered_exp.append({
                 "instrument_name": exp["instrument_name"],
                 "mark_iv": order_book['result']['mark_iv'],
@@ -64,30 +74,11 @@ for exp in expiries:
                 "strike": exp["strike"],
                 "delta": delta,
                 "volume": order_book["result"]['stats']["volume"],
-                "open_interest": order_book["result"]["open_interest"]
+                "open_interest": order_book["result"]["open_interest"],
+                "range": f"{range_min:.0f} - {range_max:.0f}"
             })
 
-# Get the current BTC and ETH index prices
-btc_index_price = requests.get(btc_get_index_endpoint).json()["result"]
-eth_index_price = requests.get(eth_get_index_endpoint).json()["result"]
-
-# Define a function to calculate the range
-def calculate_range(price, mark_iv):
-    range_pct = mark_iv / 100
-    min_range = price - (price * range_pct)
-    max_range = price + (price * range_pct)
-    return (min_range, max_range)
-
-# Calculate the range for each filtered expiry and add it as a new column
-for exp in filtered_exp:
-    if "BTC" in exp["instrument_name"]:
-        index_price = btc_index_price
-    else:
-        index_price = eth_index_price
-    range_min, range_max = calculate_range(index_price, exp["mark_iv"])
-    exp["range"] = f"{range_min:.2f}-{range_max:.2f}"
-
-# Create a pandas DataFrame from the filtered expiries data
+# Convert the filtered data to a pandas DataFrame
 df = pd.DataFrame(filtered_exp, columns=["instrument_name", "mark_iv", "option_type", "strike", "delta", "volume", "open_interest", "range"])
 
 # Print the DataFrame
