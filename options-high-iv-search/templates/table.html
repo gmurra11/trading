@@ -1,127 +1,81 @@
-<!--
-
 <div class="table-container">
-  <div class="table-wrapper">
-      <h2>Nearest Friday's Call Options</h2>
-      <table border="1" style="border-collapse: collapse;">
-        <tr style="background-color: lightgray;">
-          <th style="padding: 8px;">#</th>
-          <th style="padding: 8px;">Instrument Name</th>
-          <th style="padding: 8px;">IV</th>
-          <th style="padding: 8px;">IVR</th>
-          <th style="padding: 8px;">IVP</th>
-          <th style="padding: 8px;">OI</th>
-          <th style="padding: 8px;">DAILY VOL</th>
-          <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
-          <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
-        </tr>
-        {% for option in data_nearest_friday_call %}
-        <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;">{{ loop.index }}</td>
-          <td style="padding: 8px;">{{ option[0] }}</td>
-          <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
-          <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
-          <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
-          <td style="padding: 8px;">{{ option[4]|int }}</td>
-          <td style="padding: 8px;">{{ option[5]|int }}</td>
-          <td style="padding: 8px;">{{ option[6]|int }}</td>
-          <td style="padding: 8px;">{{ option[7]|int }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-    </div>
+  <div class="table-wrapper call-wrapper">
+    <h3>LESS THAN 50 DAYS</h3>
+    <table border="1" style="border-collapse: collapse;">
+      <tr style="background-color: lightgray;">
+        <th style="padding: 8px;">#</th>
+        <th style="padding: 8px;">Instrument Name</th>
+        <th style="padding: 8px;">Option Type</th>
+        <th style="padding: 8px;">IV</th>
+        <th style="padding: 8px;">IVP (Percentile)</th>
+        <th style="padding: 8px;">IVR (Rank)</th>
+        <th style="padding: 8px;">Strike</th>
+        <th style="padding: 8px;">Delta</th>
+        <th style="padding: 8px;">Volume</th>
+        <th style="padding: 8px;">Open Interest</th>
+        <th style="padding: 8px;">Range</th>
+        <th style="padding: 8px;">Days to Expiry</th>
+      </tr>
 
-    <div class="table-wrapper">
-        <h2>Nearest Friday's Put Options</h2>
-        <table border="1" style="border-collapse: collapse;">
-          <tr style="background-color: lightgray;">
-            <th style="padding: 8px;">#</th>
-            <th style="padding: 8px;">Instrument Name</th>
-            <th style="padding: 8px;">IV</th>
-            <th style="padding: 8px;">IVR</th>
-            <th style="padding: 8px;">IVP</th>
-            <th style="padding: 8px;">OI</th>
-            <th style="padding: 8px;">DAILY VOL</th>
-            <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
-            <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
-          </tr>
-          {% for option in data_nearest_friday_put %}
-          <tr style="background-color: lightpink;">
-            <td style="padding: 8px;">{{ loop.index }}</td>
-            <td style="padding: 8px;">{{ option[0] }}</td>
-            <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
-            <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
-            <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
-            <td style="padding: 8px;">{{ option[4]|int }}</td>
-            <td style="padding: 8px;">{{ option[5]|int }}</td>
-            <td style="padding: 8px;">{{ option[6]|int }}</td>
-            <td style="padding: 8px;">{{ option[7]|int }}</td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
+      {% for option in data_less_than_50 %}
+        {% set max_delta = max_delta_eth if 'ETH' in option['instrument_name'] else max_delta_btc %}
+        <tr style="text-align: center;background-color: {% if 'ETH' in option['instrument_name'] %}lightblue{% elif 'BTC' in option['instrument_name'] %}lightyellow{% else %}lightgreen{% endif %};">
+          <td style="padding: 8px;">{{ loop.index }}</td>
+          <td style="padding: 8px;">{{ option['instrument_name'] }}</td>
+          <td style="padding: 8px;text-align: center;font-weight: bold;background-color: {% if option['option_type'] == 'put' %}pink{% elif option['option_type'] == 'call' %}lightgreen{% endif %}">{{ option['option_type'] }}</td>
+          <td style="padding: 8px;font-weight: bold">{{ option['mark_iv'] }}</td>
+          <td style="padding: 8px;">{{ "{:.2f}".format(option['ivr']) }}</td>
+          <td style="padding: 8px;">{{ "{:.2f}".format(option['ivp']) }}</td>
+          <td style="padding: 8px;background-color: lightgray">{{ "{:.0f}".format(option['strike']) }}</td>
+          <td style="padding: 8px;font-weight: bold">{{ "{:.2f}".format(option['delta']) }}</td>
+          <td style="padding: 8px;">{{ option['volume'] }}</td>
+          <td style="padding: 8px;">{{ "{:.0f}".format(option['open_interest']) }}</td>
+          <td style="padding: 8px;">{{ option['range'] }}</td>
+          <td style="padding: 8px;">{{ option['days_to_expiry'] }}</td>
+        </tr>
+      {% endfor %}
+      </table>
+
+  </div>
 </div>
 
--->
+</br>
 
 <div class="table-container">
   <div class="table-wrapper call-wrapper">
-    <h3>Following Friday's Call Options</h3>
+    <h3>LESS THAN 80 DAYS</h3>
     <table border="1" style="border-collapse: collapse;">
       <tr style="background-color: lightgray;">
         <th style="padding: 8px;">#</th>
         <th style="padding: 8px;">Instrument Name</th>
+        <th style="padding: 8px;">Option Type</th>
         <th style="padding: 8px;">IV</th>
-        <th style="padding: 8px;">IVR</th>
-        <th style="padding: 8px;">IVP</th>
-        <th style="padding: 8px;">OI</th>
-        <th style="padding: 8px;">DAILY VOL</th>
-        <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
-        <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
+        <th style="padding: 8px;">IVP (Percentile)</th>
+        <th style="padding: 8px;">IVR (Rank)</th>
+        <th style="padding: 8px;">Strike</th>
+        <th style="padding: 8px;">Delta</th>
+        <th style="padding: 8px;">Volume</th>
+        <th style="padding: 8px;">Open Interest</th>
+        <th style="padding: 8px;">Range</th>
+        <th style="padding: 8px;">Days to Expiry</th>
       </tr>
-      {% for option in data_following_friday_call %}
-      <tr style="background-color: lightgreen;">
-        <td style="padding: 8px;">{{ loop.index }}</td>
-        <td style="padding: 8px;">{{ option[0] }}</td>
-        <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[4]|int }}</td>
-        <td style="padding: 8px;">{{ option[5]|int }}</td>
-        <td style="padding: 8px;">{{ option[6]|int }}</td>
-        <td style="padding: 8px;">{{ option[7]|int }}</td>
-      </tr>
+      {% for option in data_less_than_80 %}
+        <tr style="text-align: center;background-color: {% if 'ETH' in option['instrument_name'] %}lightblue{% elif 'BTC' in option['instrument_name'] %}lightyellow{% else %}lightgreen{% endif %};">
+          <td style="padding: 8px;">{{ loop.index }}</td>
+          <td style="padding: 8px;">{{ option['instrument_name'] }}</td>
+          <td style="padding: 8px; text-align: center;font-weight: bold;background-color: {% if option['option_type'] == 'put' %}pink{% elif option['option_type'] == 'call' %}lightgreen{% endif %}">{{ option['option_type'] }}</td>
+          <td style="padding: 8px;font-weight: bold">{{ option['mark_iv'] }}</td>
+          <td style="padding: 8px;">{{ "{:.2f}".format(option['ivr']) }}</td>
+          <td style="padding: 8px;">{{ "{:.2f}".format(option['ivp']) }}</td>
+          <td style="padding: 8px;background-color: lightgray">{{ "{:.0f}".format(option['strike']) }}</td>
+          <td style="padding: 8px;font-weight: bold">{{ "{:.2f}".format(option['delta']) }}</td>
+          <td style="padding: 8px;">{{ option['volume'] }}</td>
+          <td style="padding: 8px;">{{ "{:.0f}".format(option['open_interest']) }}</td>
+          <td style="padding: 8px;">{{ option['range'] }}</td>
+          <td style="padding: 8px;">{{ option['days_to_expiry'] }}</td>
+        </tr>
       {% endfor %}
-    </table>
-  </div>
 
-  <div class="table-wrapper put-wrapper">
-    <h3>Following Friday's Put Options</h3>
-    <table border="1" style="border-collapse: collapse;">
-      <tr style="background-color: lightgray;">
-        <th style="padding: 8px;">#</th>
-        <th style="padding: 8px;">Instrument Name</th>
-        <th style="padding: 8px;">IV</th>
-        <th style="padding: 8px;">IVR</th>
-        <th style="padding: 8px;">IVP</th>
-        <th style="padding: 8px;">OI</th>
-        <th style="padding: 8px;">DAILY VOL</th>
-        <th style="padding: 8px;">WEEKLY LIQUIDITY</th>
-        <th style="padding: 8px;">MONTHLY LIQUIDITY</th>
-      </tr>
-      {% for option in data_following_friday_put %}
-      <tr style="background-color: lightpink;">
-        <td style="padding: 8px;">{{ loop.index }}</td>
-        <td style="padding: 8px;">{{ option[0] }}</td>
-        <td style="padding: 8px;">{{ option[1]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[2]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[3]|round(2) }}%</td>
-        <td style="padding: 8px;">{{ option[4]|int }}</td>
-        <td style="padding: 8px;">{{ option[5]|int }}</td>
-        <td style="padding: 8px;">{{ option[6]|int }}</td>
-        <td style="padding: 8px;">{{ option[7]|int }}</td>
-      </tr>
-      {% endfor %}
     </table>
   </div>
 </div>
@@ -137,7 +91,7 @@
 }
 
 .call-wrapper {
-  background-color: lightgreen;
+  background-color: ghostwhite;
   border: 1px solid #ccc;
 }
 
