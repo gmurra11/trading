@@ -20,9 +20,9 @@ def get_diff(current, new_value):
     current_value = current
     diff = current_value - new_value
     if diff > 0:
-        return '+' + str(round(diff, 2))
+        return '+{:d}'.format(int(round(diff, 0)))
     elif diff < 0:
-        return str(round(diff, 2))
+        return '{:d}'.format(int(round(diff, 0)))
     else:
         return '0'
 

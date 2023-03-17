@@ -11,7 +11,7 @@ HISTORICAL_LOW_IV = 15.55
 HISTORICAL_HIGH_IV = 185.90
 
 # Data Directory
-DIR = "/home/gmurray/REPO/trading/data-weekly"
+DIR = "/home/gmurray/REPO/trading/data"
 
 # Read the configuration file
 config = configparser.ConfigParser()

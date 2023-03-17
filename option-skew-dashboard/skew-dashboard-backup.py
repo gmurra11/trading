@@ -29,8 +29,6 @@ BTC_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-BTC-25DELTA-IV-CHANGE.csv"
 Q1_EXPIRY = "31st March"
 Q2_EXPIRY = "30th June"
 Q3_EXPIRY = "29th September"
-Q4_EXPIRY = "29th December"
-
 
 #################### Shared function ###########################
 
@@ -122,11 +120,9 @@ def add_multi_expiry_diff(data):
     q1_iv = float(data[0])
     q2_iv = float(data[1])
     q3_iv = float(data[2])
-    q4_iv = float(data[3])
     diff_with_q1_vs_q2 = get_diff(q1_iv, q2_iv)
     diff_with_q1_vs_q3 = get_diff(q1_iv, q3_iv)
-    diff_with_q1_vs_q4 = get_diff(q1_iv, q4_iv)
-    return [diff_with_q1_vs_q2, diff_with_q1_vs_q3, diff_with_q1_vs_q4]
+    return [diff_with_q1_vs_q2, diff_with_q1_vs_q3]
 
 eth_multi_expiry_delta25_row = get_data(MULTI_EXPIRY_SKEW_ETH)
 eth_multi_expiry_diff_changes = add_multi_expiry_diff(eth_multi_expiry_delta25_row)
@@ -169,21 +165,16 @@ def push_web():
                                         data_multi_expiry_eth_q1_iv=eth_multi_expiry_delta25_row[0],
                                         data_multi_expiry_eth_q2_iv=eth_multi_expiry_delta25_row[1],
                                         data_multi_expiry_eth_q3_iv=eth_multi_expiry_delta25_row[2],
-                                        data_multi_expiry_eth_q4_iv=eth_multi_expiry_delta25_row[3],
                                         data_multi_expiry_eth_q2_iv_diff=eth_multi_expiry_diff_changes[0],
                                         data_multi_expiry_eth_q3_iv_diff=eth_multi_expiry_diff_changes[1],
-                                        data_multi_expiry_eth_q4_iv_diff=eth_multi_expiry_diff_changes[2],
                                         data_multi_expiry_btc_q1_iv=btc_multi_expiry_delta25_row[0],
                                         data_multi_expiry_btc_q2_iv=btc_multi_expiry_delta25_row[1],
                                         data_multi_expiry_btc_q3_iv=btc_multi_expiry_delta25_row[2],
-                                        data_multi_expiry_btc_q4_iv=btc_multi_expiry_delta25_row[3],
                                         data_multi_expiry_btc_q2_iv_diff=btc_multi_expiry_diff_changes[0],
                                         data_multi_expiry_btc_q3_iv_diff=btc_multi_expiry_diff_changes[1],
-                                        data_multi_expiry_btc_q4_iv_diff=btc_multi_expiry_diff_changes[2],
                                         data_q1_label=Q1_EXPIRY,
                                         data_q2_label=Q2_EXPIRY,
-                                        data_q3_label=Q3_EXPIRY,
-                                        data_q4_label=Q4_EXPIRY
+                                        data_q3_label=Q3_EXPIRY
                                         )
 
 if __name__ == '__main__':
