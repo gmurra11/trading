@@ -92,7 +92,7 @@ def main():
         f"lvt_chart Skew 25Δ BTC  (2).csv": f"LVT-SKEW25-1M-BTC.csv",
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv",
-        f"lvt_chart Multi-Expiry Skew ETH .csv": f"LVT-MULTI-EXPIRY-SKEW.csv",
+        f"lvt_chart Multi-Expiry Skew ETH .csv": f"LVT-MULTI-EXPIRY-SKEW-ETH.csv",
         f"lvt_chart Multi-Expiry Skew BTC .csv": f"LVT-MULTI-EXPIRY-SKEW-BTC.csv"
     }
 
