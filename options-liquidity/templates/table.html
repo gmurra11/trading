@@ -1,10 +1,10 @@
 <div class="table-container">
-    <div class="table-wrapper call-wrapper">
-      <h3>EXPIRY LESS 50 DAYS CALLS</h3>
+    <div class="table-wrapper head-wrapper">
+      <h3>{{ data_currency }} EXPIRY LESS 50 DAYS <span style="color:green;">CALLS</span></h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
-          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;width: 160px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
@@ -17,11 +17,11 @@
           <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5] }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6] }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -36,12 +36,12 @@
         </table>
     </div>
 
-    <div class="table-wrapper put-wrapper">
-      <h3>EXPIRY LESS 50 DAYS PUTS</h3>
+    <div class="table-wrapper head-wrapper">
+      <h3>{{ data_currency }} EXPIRY LESS 50 DAYS <span style="color:red;">PUTS</span></h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
-          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;width: 160px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
@@ -54,11 +54,11 @@
           <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5] }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6] }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -67,12 +67,12 @@
 </br>
 
 <div class="table-container">
-    <div class="table-wrapper call-wrapper">
-      <h3>EXPIRY LESS 80 DAYS CALLS</h3>
+    <div class="table-wrapper head-wrapper">
+      <h3>{{ data_currency }} EXPIRY LESS 80 DAYS <span style="color:green;">CALLS</span></h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
-          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;width: 160px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
@@ -85,11 +85,11 @@
           <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5] }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6] }}</td>
         </tr>
         {% endfor %}
       </table>
@@ -104,12 +104,12 @@
         </table>
     </div>
 
-    <div class="table-wrapper put-wrapper">
-      <h3>EXPIRY LESS 80 DAYS PUTS</h3>
+    <div class="table-wrapper head-wrapper">
+      <h3>{{ data_currency }} EXPIRY LESS 80 DAYS <span style="color:red;">PUTS</span></h3>
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">#</th>
-          <th style="padding: 8px;">Instrument Name</th>
+          <th style="padding: 8px;width: 160px;">Instrument Name</th>
           <th style="padding: 8px;">WEEKLY BLOCK LIQUIDITY</th>
           <th style="padding: 8px;">(T1) WEEKLY DIFFERENCE</th>
           <th style="padding: 8px;">(T7) WEEKLY DIFFERENCE</th>
@@ -122,17 +122,16 @@
           <td style="padding: 8px;background-color: ghostwhite;">{{ loop.index }}</td>
           <td style="padding: 8px;background-color: ghostwhite;">{{ option[0] }}</td>
           <td style="padding: 8px;">{{ option[1]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[3]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[5]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[3] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[5] }}</td>
           <td style="padding: 8px;">{{ option[2]|int }}</td>
-          <td style="padding: 8px;background-color: papayawhip;">{{ option[4]|int }}</td>
-          <td style="padding: 8px;background-color: powderblue;">{{ option[6]|int }}</td>
+          <td style="padding: 8px;background-color: papayawhip;">{{ option[4] }}</td>
+          <td style="padding: 8px;background-color: powderblue;">{{ option[6] }}</td>
         </tr>
         {% endfor %}
       </table>
     </div>
 </div>
--->
 
 <style>
 .table-container {
@@ -152,23 +151,24 @@ td {
 }
 
 h {
-  padding: 14px;
+  padding: 10px;
   text-align: center;
-}
-
-.call-wrapper {
-  background-color: lightgreen;
-  border: 1px solid #ccc;
-}
-
-.put-wrapper {
-  background-color: lightpink;
-  border: 1px solid #ccc;
 }
 
 .ratio {
   background-color: ghostwhite;
   border: 1px solid #ccc;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.head-wrapper {
+  background-color: {% if data_currency == 'BTC' %}lightyellow{% else %}lightblue{% endif %};
+  border: 1px solid #ccc;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+  text-align: center;
 }
 
 h3 {

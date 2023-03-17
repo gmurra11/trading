@@ -3,8 +3,6 @@ import requests
 
 now = int(time.time() * 1000)
 
-#print(__name__)
-
 def get_options(currency, kind, expired):
     endpoint = "https://www.deribit.com/api/v2/public/get_instruments"
     params = {"currency": currency, "kind": kind, "expired": expired}
@@ -56,10 +54,10 @@ def get_strikes(currency, min_days, max_days, min_strike, max_strike):
     strikes = [format_instrument_name(instrument) for instrument in options]
     return strikes
 
-# Get the BTC and ETH options data
-eth_strikes = get_strikes("ETH", 30, 80, 1000, 2500)
-btc_strikes = get_strikes("BTC", 30, 80, 15000, 30000)
+# Get the BTC and ETH options data  - USE FOR TESTING
+#eth_strikes = get_strikes("ETH", 30, 80, 1000, 2500)
+#btc_strikes = get_strikes("BTC", 30, 80, 15000, 30000)
 
-# Print the list of ETH and BTC strikes for the first expiry month in the list
+# Print the list of ETH and BTC strikes for the first expiry month in the list - USE FOR TESTING
 #print(f"ETH Options Strikes: {eth_strikes}")
 #print(f"BTC Options Strikes: {btc_strikes}")
