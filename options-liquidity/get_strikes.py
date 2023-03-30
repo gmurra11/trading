@@ -55,9 +55,9 @@ def get_strikes(currency, min_days, max_days, min_strike, max_strike):
     return strikes
 
 # Get the BTC and ETH options data  - USE FOR TESTING
-#eth_strikes = get_strikes("ETH", 30, 80, 1000, 2500)
+eth_strikes = get_strikes("ETH", 25, 80, 1000, 2500)
 #btc_strikes = get_strikes("BTC", 30, 80, 15000, 30000)
 
 # Print the list of ETH and BTC strikes for the first expiry month in the list - USE FOR TESTING
-#print(f"ETH Options Strikes: {eth_strikes}")
+print(f"ETH Options Strikes: {eth_strikes}")
 #print(f"BTC Options Strikes: {btc_strikes}")

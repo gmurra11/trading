@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime, timedelta
 import csv
 from flask import Flask, render_template
 
@@ -19,11 +20,14 @@ SKEW25_CURRENT_BTC = f"{DIR}/LVT-SKEW25-1D-BTC.csv"
 SKEW25_T1_BTC = f"{T1}/LVT-SKEW25-1D-BTC.csv" #Note using 1D from yesterday as a comparison.  Ie: from an older file found in daily
 SKEW25_T7_BTC = f"{DIR}/LVT-SKEW25-1W-BTC.csv"
 SKEW25_T30_BTC = f"{DIR}/LVT-SKEW25-1M-BTC.csv"
-MULTI_EXPIRY_SKEW_ETH = f"{DIR}/LVT-MULTI-EXPIRY-SKEW.csv"
+MULTI_EXPIRY_SKEW_ETH = f"{DIR}/LVT-MULTI-EXPIRY-SKEW-ETH.csv"
 MULTI_EXPIRY_SKEW_BTC = f"{DIR}/LVT-MULTI-EXPIRY-SKEW-BTC.csv"
 # In Laevitas it's called "ETH Time Lapse Skew" under https://app.laevitas.ch/eth/deribit/options/volatility/iv
 ETH_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-ETH-25DELTA-IV-CHANGE.csv"
 BTC_IV_CHANGE_SKEW_CSV = f"{DIR}/LVT-BTC-25DELTA-IV-CHANGE.csv"
+#Used for Volatility Carry Spread
+ETH_VOL_CARRY_SPREAD = f"{DIR}/LVT-ETH-VOLATILITY-CARRY-SPREAD.csv"
+BTC_VOL_CARRY_SPREAD = f"{DIR}/LVT-BTC-VOLATILITY-CARRY-SPREAD.csv"
 
 # Quarterly Expiries
 Q1_EXPIRY = "31st March"
@@ -136,6 +140,35 @@ btc_multi_expiry_diff_changes = add_multi_expiry_diff(btc_multi_expiry_delta25_r
 
 ############################ Pass to webpage ###################################################
 
+# Volatility Carry - IV - RV (Realized Vol) = spread.   Last 24 hrs spread vs historical.
+
+ETH_MIN_SPREAD = "-93.58"
+ETH_MAX_SPREAD = "58.18"
+BTC_MIN_SPREAD = "-66.65"
+BTC_MAX_SPREAD = "59.58"
+
+def get_carry_spread(CSV_FILE):
+    # Read the csv file into a pandas dataframe
+    df = pd.read_csv(CSV_FILE)
+
+    # Convert the DateTime column to a datetime object
+    df['DateTime'] = pd.to_datetime(df['DateTime'])
+
+    # Filter the dataframe to only include the last 24 hours of data
+    end_time = datetime.now()
+    start_time = end_time - timedelta(hours=24)
+    df = df[df['DateTime'] >= start_time]
+
+    # Calculate the average of the "Spread" column
+    today_spread = df['Spread'].mean()
+
+    return round(today_spread, 1)
+
+eth_today_spread = get_carry_spread(ETH_VOL_CARRY_SPREAD)
+btc_today_spread = get_carry_spread(BTC_VOL_CARRY_SPREAD)
+
+################################################################################################
+
 @app.route('/skew-dashboard')
 def push_web():
     return render_template('table.html', data_avg_skew_eth=avg_skew_eth,
@@ -180,6 +213,12 @@ def push_web():
                                         data_multi_expiry_btc_q2_iv_diff=btc_multi_expiry_diff_changes[0],
                                         data_multi_expiry_btc_q3_iv_diff=btc_multi_expiry_diff_changes[1],
                                         data_multi_expiry_btc_q4_iv_diff=btc_multi_expiry_diff_changes[2],
+                                        data_eth_today_spread=eth_today_spread,
+                                        data_eth_min_spread=ETH_MIN_SPREAD,
+                                        data_eth_max_spread=ETH_MAX_SPREAD,
+                                        data_btc_today_spread=btc_today_spread,
+                                        data_btc_min_spread=BTC_MIN_SPREAD,
+                                        data_btc_max_spread=BTC_MAX_SPREAD,
                                         data_q1_label=Q1_EXPIRY,
                                         data_q2_label=Q2_EXPIRY,
                                         data_q3_label=Q3_EXPIRY,

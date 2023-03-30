@@ -7,8 +7,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # Constants
-HISTORICAL_LOW_IV = 15.55
-HISTORICAL_HIGH_IV = 185.90
+HISTORICAL_IV = {
+    "ETH": {"LOW": 15.55, "HIGH": 185.90},
+    "BTC": {"LOW": 9.28, "HIGH": 127.08}
+}
 
 # Data Directory
 DIR = "/home/gmurray/REPO/trading/data"
@@ -20,11 +22,14 @@ config.read('/home/gmurray/REPO/trading/config.ini')
 client_id = config['DEFAULT']['client_id']
 client_secret = config['DEFAULT']['client_secret']
 
-def calculate_ivr(mark_iv):
-    return (mark_iv - HISTORICAL_LOW_IV) / (HISTORICAL_HIGH_IV - HISTORICAL_LOW_IV) * 100
+def calculate_ivr(currency, mark_iv):
+    historical_low_iv = HISTORICAL_IV[currency]["LOW"]
+    historical_high_iv = HISTORICAL_IV[currency]["HIGH"]
+    return (mark_iv - historical_low_iv) / (historical_high_iv - historical_low_iv) * 100
 
-def calculate_ivp(mark_iv):
-    df = pd.read_csv(f"{DIR}/historical_eth_iv.csv", encoding="utf-8", sep=',')
+def calculate_ivp(currency, mark_iv):
+    historical_low_iv = HISTORICAL_IV[currency]["LOW"]
+    df = pd.read_csv(f"{DIR}/historical_{currency.lower()}_iv.csv", encoding="utf-8", sep=',')
     ivp = df.query("HV < @mark_iv").count()[0]/365*100
     return ivp
 
@@ -73,11 +78,11 @@ eth_data = eth_response.json()
 # Combine the BTC and ETH data
 data = btc_data["result"] + eth_data["result"]
 
-# Filter the expiries based on open interest between 30 and 60 days
+# Filter the expiries based on open interest between 25 and 60 days
 now = int(time.time() * 1000)
 expiries = [d for d in data
             if d["expiration_timestamp"] > now
-            and d["expiration_timestamp"] - now >= 30*86400*1000
+            and d["expiration_timestamp"] - now >= 25*86400*1000
             and d["expiration_timestamp"] - now <= 80*86400*1000]
 
 # Filter the expiries based on strikes less than 0.30 delta
@@ -88,6 +93,7 @@ for exp in expiries:
     endpoint = f"https://www.deribit.com/api/v2/public/get_order_book_by_instrument_id?instrument_id={exp['instrument_id']}"
     response = requests.get(endpoint)
     order_book = response.json()
+    currency = exp["base_currency"]
     if "result" in order_book and order_book['result'] and order_book['result']['open_interest']:
         delta = order_book['result']['greeks']['delta']
         if 0.15 < abs(delta) < 0.32:
@@ -104,8 +110,8 @@ for exp in expiries:
                 "open_interest": order_book["result"]["open_interest"],
                 "range": f"{range_min:.0f} - {range_max:.0f}",
                 "days_to_expiry": (pd.to_datetime(exp['expiration_timestamp'], unit='ms') - pd.Timestamp.now()).days,
-                "ivr": calculate_ivr(mark_iv),
-                "ivp": calculate_ivp(mark_iv),
+                "ivr": calculate_ivr(currency, mark_iv),
+                "ivp": calculate_ivp(currency, mark_iv),
             }
             if filtered_exp_dict["days_to_expiry"] < 50:
                 filtered_exp_lt_50.append(filtered_exp_dict)

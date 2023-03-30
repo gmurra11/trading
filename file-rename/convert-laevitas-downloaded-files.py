@@ -58,7 +58,7 @@ def main():
     dst_dir_options = "/home/gmurray/REPO/trading/data"
 
     # Output directory skew
-    dst_dir_skew_options = "/home/gmurray/REPO/trading/data-skew-test"
+    dst_dir_skew_options = "/home/gmurray/REPO/trading/data-skew"
 
     # Daily output directory for quaterly data
     daily_dir_options = "/home/gmurray/REPO/trading/data/daily"
@@ -67,10 +67,10 @@ def main():
     weekly_dir_options = "/home/gmurray/REPO/trading/data/weekly"
 
     # Daily output directory for skew data
-    daily_dir_skew_options = "/home/gmurray/REPO/trading/data-skew-test/daily"
+    daily_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/daily"
 
     # Weekly output directory for skew data
-    weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew-test/weekly"
+    weekly_dir_skew_options = "/home/gmurray/REPO/trading/data-skew/weekly"
 
     filename_map_50_or_80_days = {
         f"lvt_chart ETH Buy_Sell Volume Last  Month {LESS_THAN_50_DAYS} .csv": f"LVT-MONTHLY-{LESS_THAN_50_DAYS}-ETH.csv",
