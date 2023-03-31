@@ -18,3 +18,5 @@ for script in scripts:
     script_path = os.path.join(base_dir, script)
     # Stop the script
     os.system(f"pkill -f {script_path}")
+
+# test
