@@ -93,7 +93,9 @@ def main():
         f"lvt_chart Time Lapse Skew  ETH .csv": f"LVT-ETH-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Time Lapse Skew  BTC .csv": f"LVT-BTC-25DELTA-IV-CHANGE.csv",
         f"lvt_chart Multi-Expiry Skew ETH .csv": f"LVT-MULTI-EXPIRY-SKEW-ETH.csv",
-        f"lvt_chart Multi-Expiry Skew BTC .csv": f"LVT-MULTI-EXPIRY-SKEW-BTC.csv"
+        f"lvt_chart Multi-Expiry Skew BTC .csv": f"LVT-MULTI-EXPIRY-SKEW-BTC.csv",
+        f"lvt_chart ETH Implied Volatility vs Realized Volatility  .csv": f"LVT-ETH-VOLATILITY-CARRY-SPREAD.csv",
+        f"lvt_chart BTC Implied Volatility vs Realized Volatility  .csv": f"LVT-BTC-VOLATILITY-CARRY-SPREAD.csv"
     }
 
     # WEEKLY DIRECTROY CLEAN UP SUNDAY

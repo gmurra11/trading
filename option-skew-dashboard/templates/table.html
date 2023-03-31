@@ -169,10 +169,14 @@ indicates a higher IV further out.
 
 <h2>Volatility Carry Spread</h2>
 <p>
-<b>Spread is the difference between IV and RV (Realized Volatility)</b>. Positive Carry = Go Short; Negative Carry Go Long.
+<b>Positive Carry</b> = Go <b><span style="color:red">Short</span></b>;
+
+Positive Carry means the RV is <b>below</b> IV, so this means that IV over estimated the underlying move, the actual move was less.  Benefit to net sellers.
 <br/>
-Positive Carry means the RV is below IV, so this means that IV over estimated the underlying move, the actual move was less.  Benefit to net sellers.
-Negative Carry means RV is above IV, so exceeded the implied volatility, better for net buyers (ie: you want more volatility).
+<b>Negative Carry</b> = Go <b><span style="color:green">Long</span></b>;
+Negative Carry means RV is <b>above</b> IV, so exceeded the implied volatility, better for net buyers (ie: you want more volatility).
+<br/><br/>
+Spread is the difference between IV and RV (Realized Volatility).
 <p/>
 <div class="table-container">
   <div class="table-wrapper eth-wrapper">
@@ -180,13 +184,13 @@ Negative Carry means RV is above IV, so exceeded the implied volatility, better 
       <table border="1" style="border-collapse: collapse;">
         <tr style="background-color: lightgray;">
           <th style="padding: 8px;">ETH Today's Spread</th>
-          <th style="padding: 8px;">ETH MIN Spread</th>
-          <th style="padding: 8px;">ETH MAX Spread</th>
+          <th style="padding: 8px;">ETH MIN Spread (LONG)</th>
+          <th style="padding: 8px;">ETH MAX Spread (SHORT)</th>
         </tr>
         <tr style="background-color: lightgreen;">
-          <td style="padding: 8px;background-color: lightgreen;">{{ data_eth_today_spread }}</td>
-          <td style="padding: 8px;background-color: pink;">{{ data_eth_min_spread }}</td>
-          <td style="padding: 8px;background-color: ghostwhite;">{{ data_eth_max_spread }}</td>
+          <td style="padding: 8px;background-color: ghostwhite;">{{ data_eth_today_spread }}</td>
+          <td style="padding: 8px;background-color: lightgreen;">{{ data_eth_min_spread }}</td>
+          <td style="padding: 8px;background-color: pink;">{{ data_eth_max_spread }}</td>
         </tr>
       </table>
     </div>
@@ -195,21 +199,27 @@ Negative Carry means RV is above IV, so exceeded the implied volatility, better 
         <table border="1" style="border-collapse: collapse;">
           <tr style="background-color: lightgray;">
             <th style="padding: 8px;">BTC Today's Spread</th>
-            <th style="padding: 8px;">BTC MIN Spread</th>
-            <th style="padding: 8px;">BTC MAX Spread</th>
+            <th style="padding: 8px;">BTC MIN Spread (LONG)</th>
+            <th style="padding: 8px;">BTC MAX Spread (SHORT)</th>
           </tr>
           <tr style="background-color: lightgreen;">
-            <td style="padding: 8px;background-color: lightgreen;">{{ data_btc_today_spread }}</td>
-            <td style="padding: 8px;background-color: pink;">{{ data_btc_min_spread }}</td>
-            <td style="padding: 8px;background-color: ghostwhite;">{{ data_btc_max_spread }}</td>
+            <td style="padding: 8px;background-color: ghostwhite;">{{ data_btc_today_spread }}</td>
+            <td style="padding: 8px;background-color: lightgreen;">{{ data_btc_min_spread }}</td>
+            <td style="padding: 8px;background-color: pink;">{{ data_btc_max_spread }}</td>
           </tr>
         </table>
       </div>
 </div>
 
 <style>
+
+  * {
+    box-sizing: border-box;
+  }
+
 .table-container {
   display: flex;
+  justify-content: center;
 }
 
 .table-wrapper {
@@ -220,11 +230,19 @@ Negative Carry means RV is above IV, so exceeded the implied volatility, better 
 .eth-wrapper {
   background-color: lightblue;
   border: 1px solid #ccc;
+  width: 100%;
+  margin: 0;
 }
 
 .btc-wrapper {
   background-color: lightyellow;
   border: 1px solid #ccc;
+  width: 100%;
+  margin: 0;
+}
+
+.table-wrapper table {
+  width: 100%;
 }
 
 p {
