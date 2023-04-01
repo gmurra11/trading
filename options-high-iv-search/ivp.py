@@ -96,7 +96,7 @@ for exp in expiries:
     currency = exp["base_currency"]
     if "result" in order_book and order_book['result'] and order_book['result']['open_interest']:
         delta = order_book['result']['greeks']['delta']
-        if 0.15 < abs(delta) < 0.32:
+        if 0.10 < abs(delta) < 0.32:
             index_price = btc_index_price if exp["base_currency"] == "BTC" else eth_index_price
             mark_iv = order_book['result']['mark_iv']
             range_min, range_max = calculate_range(index_price, mark_iv)

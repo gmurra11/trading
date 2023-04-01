@@ -167,4 +167,4 @@ def get_options_table(call_or_put, btc_or_eth, min_days, max_days, min_strike, m
         options_diff.append((opt[0], opt_1, opt_2, weekly_diff_t1, monthly_diff_t1, weekly_diff_t7, monthly_diff_t7))
 
     sorted_options = sorted(options_diff, key=lambda x: (x[2], x[1]), reverse=True)
-    return sorted_options[:10]
+    return sorted_options[:12]

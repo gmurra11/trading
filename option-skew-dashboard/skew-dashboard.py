@@ -30,10 +30,10 @@ ETH_VOL_CARRY_SPREAD = f"{DIR}/LVT-ETH-VOLATILITY-CARRY-SPREAD.csv"
 BTC_VOL_CARRY_SPREAD = f"{DIR}/LVT-BTC-VOLATILITY-CARRY-SPREAD.csv"
 
 # Quarterly Expiries
-Q1_EXPIRY = "31st March"
-Q2_EXPIRY = "30th June"
-Q3_EXPIRY = "29th September"
-Q4_EXPIRY = "29th December"
+EXPIRY_1 = "30th June"
+EXPIRY_2 = "29th September"
+EXPIRY_3 = "29th December"
+EXPIRY_4 = "29th March 2024"
 
 
 #################### Shared function ###########################
@@ -219,10 +219,10 @@ def push_web():
                                         data_btc_today_spread=btc_today_spread,
                                         data_btc_min_spread=BTC_MIN_SPREAD,
                                         data_btc_max_spread=BTC_MAX_SPREAD,
-                                        data_q1_label=Q1_EXPIRY,
-                                        data_q2_label=Q2_EXPIRY,
-                                        data_q3_label=Q3_EXPIRY,
-                                        data_q4_label=Q4_EXPIRY
+                                        data_q1_label=EXPIRY_1,
+                                        data_q2_label=EXPIRY_2,
+                                        data_q3_label=EXPIRY_3,
+                                        data_q4_label=EXPIRY_4
                                         )
 
 if __name__ == '__main__':
